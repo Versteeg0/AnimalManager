@@ -20,7 +20,7 @@ namespace BeestjeOpJeFeestje.Models
         public string Type { get; set; }
       
         [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(1, int.MaxValue, ErrorMessage ="Vul een waarde in die groter is dan 0")]
+        [Range(1, double.MaxValue, ErrorMessage ="Vul een waarde in die groter is dan 0")]
         [Display(Name = "Prijs")]
         public double Price { get; set; }
        
