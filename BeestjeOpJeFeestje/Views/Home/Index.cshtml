@@ -2,9 +2,20 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Boek een beestje</h1>
-    <p class="lead">Welkom bij 'Beestje op een feestje'. Hier kun je een of meerdere van onze dieren boeken voor op jou feestje! kies de dag van je feestje en volg de stappen om je beestje te boeken.</p>
+    <div class="jumbotron">
+        <h1>Boek een beestje</h1>
+        <p class="lead">Welkom bij 'Beestje op een feestje'. Hier kun je een of meerdere van onze dieren boeken voor op jou feestje! kies de dag van je feestje en volg de stappen om je beestje te boeken.</p>
+        
+    </div>
+<div class="col-lg-12">
 
+    <form action="~/Views/Boekings/Create" method="post">
+        <input type="date"/> <p/>
+        
+        <input type="submit" value="Boeken" class="btn btn-primary btn-lg">
+    </form>
+
+    <img src="~/Resources/field.png" align="right"/>
 </div>
-<p><a href="" class="btn btn-primary btn-lg">Boeken &raquo;</a></p>
+
+
