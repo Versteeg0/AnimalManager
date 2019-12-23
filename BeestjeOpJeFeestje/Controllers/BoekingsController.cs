@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.Repos;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
     public class BoekingsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private BoekingRepository boekingRepository = new BoekingRepository();
 
         // GET: Boekings
         public ActionResult Index()
         {
-            return View(db.Boekings.ToList());
+            return View(boekingRepository.GetAllBoeking());
         }
 
         // GET: Boekings/Details/5
@@ -27,7 +28,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Boeking boeking = db.Boekings.Find(id);
+            Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Boekings.Add(boeking);
-                db.SaveChanges();
+                boekingRepository.AddBoeking(boeking);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Boeking boeking = db.Boekings.Find(id);
+            Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
             {
                 return HttpNotFound();
@@ -73,7 +73,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boeking);
         }
 
-        // POST: Boekings/Edit/5
+      /*  // POST: Boekings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -82,12 +82,12 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(boeking).State = EntityState.Modified;
-                db.SaveChanges();
+                boekingRepository.Entry(boeking).State = EntityState.Modified;
+                boekingRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(boeking);
-        }
+        }*/
 
         // GET: Boekings/Delete/5
         public ActionResult Delete(int? id)
@@ -96,7 +96,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Boeking boeking = db.Boekings.Find(id);
+            Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,8 @@ namespace BeestjeOpJeFeestje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Boeking boeking = db.Boekings.Find(id);
-            db.Boekings.Remove(boeking);
-            db.SaveChanges();
+            Boeking boeking = boekingRepository.GetBoekingById(id);
+            boekingRepository.RemoveBoeking(boeking);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +118,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                boekingRepository.Dispose();
             }
             base.Dispose(disposing);
         }
