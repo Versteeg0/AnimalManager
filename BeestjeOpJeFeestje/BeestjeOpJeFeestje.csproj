@@ -167,13 +167,19 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccessoiresController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BeestjesController.cs" />
+    <Compile Include="Controllers\BoekingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accessoires.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Beestje.cs" />
+    <Compile Include="Models\Boeking.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,7 +219,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -235,6 +240,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Beestjes\Create.cshtml" />
+    <Content Include="Views\Beestjes\Delete.cshtml" />
+    <Content Include="Views\Beestjes\Details.cshtml" />
+    <Content Include="Views\Beestjes\Edit.cshtml" />
+    <Content Include="Views\Beestjes\Index.cshtml" />
+    <Content Include="Views\Boekings\Create.cshtml" />
+    <Content Include="Views\Boekings\Delete.cshtml" />
+    <Content Include="Views\Boekings\Details.cshtml" />
+    <Content Include="Views\Boekings\Edit.cshtml" />
+    <Content Include="Views\Boekings\Index.cshtml" />
+    <Content Include="Views\Accessoires\Create.cshtml" />
+    <Content Include="Views\Accessoires\Delete.cshtml" />
+    <Content Include="Views\Accessoires\Details.cshtml" />
+    <Content Include="Views\Accessoires\Edit.cshtml" />
+    <Content Include="Views\Accessoires\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

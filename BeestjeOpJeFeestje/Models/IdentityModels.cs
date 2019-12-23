@@ -29,5 +29,11 @@ namespace BeestjeOpJeFeestje.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BeestjeOpJeFeestje.Models.Beestje> Beestjes { get; set; }
+
+        public System.Data.Entity.DbSet<BeestjeOpJeFeestje.Models.Boeking> Boekings { get; set; }
+
+        public System.Data.Entity.DbSet<BeestjeOpJeFeestje.Models.Accessoires> Accessoires { get; set; }
     }
 }
