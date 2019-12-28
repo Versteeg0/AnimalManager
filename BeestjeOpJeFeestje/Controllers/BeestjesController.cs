@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.Repos;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
     public class BeestjesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private BeestjesRepository beestjesRepository = new BeestjesRepository();
 
         // GET: Beestjes
         public ActionResult Index()
         {
-            return View(db.Beestjes.ToList());
+            return View(beestjesRepository.GetBeestjes());
         }
 
         // GET: Beestjes/Details/5
@@ -27,7 +28,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Beestje beestje = db.Beestjes.Find(id);
+            Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)
             {
                 return HttpNotFound();
@@ -42,19 +43,15 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
         // POST: Beestjes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Type,Price,imagePath")] Beestje beestje)
         {
             if (ModelState.IsValid)
             {
-                db.Beestjes.Add(beestje);
-                db.SaveChanges();
+                beestjesRepository.AddBeestje(beestje);
                 return RedirectToAction("Index");
             }
-
             return View(beestje);
         }
 
@@ -65,7 +62,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Beestje beestje = db.Beestjes.Find(id);
+            Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)
             {
                 return HttpNotFound();
@@ -82,8 +79,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(beestje).State = EntityState.Modified;
-                db.SaveChanges();
+                beestjesRepository.EditBeestje(beestje);
                 return RedirectToAction("Index");
             }
             return View(beestje);
@@ -96,7 +92,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Beestje beestje = db.Beestjes.Find(id);
+            Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)
             {
                 return HttpNotFound();
@@ -109,9 +105,8 @@ namespace BeestjeOpJeFeestje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Beestje beestje = db.Beestjes.Find(id);
-            db.Beestjes.Remove(beestje);
-            db.SaveChanges();
+            Beestje beestje = beestjesRepository.GetBeestjeById(id);
+            beestjesRepository.DeleteBeestje(beestje);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +114,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                beestjesRepository.Dispose();
             }
             base.Dispose(disposing);
         }

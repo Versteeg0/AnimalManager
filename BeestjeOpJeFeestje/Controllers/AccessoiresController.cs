@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.Repos;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
     public class AccessoiresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        public AccessoiresRepository accessoiresRepository = new AccessoiresRepository();
 
         // GET: Accessoires
         public ActionResult Index()
         {
-            return View(db.Accessoires.ToList());
+            return View(accessoiresRepository.GetAccessoires());
         }
 
         // GET: Accessoires/Details/5
@@ -27,7 +28,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Accessoires accessoires = db.Accessoires.Find(id);
+            Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Accessoires.Add(accessoires);
-                db.SaveChanges();
+                accessoiresRepository.CreateAccessoire(accessoires);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Accessoires accessoires = db.Accessoires.Find(id);
+            Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)
             {
                 return HttpNotFound();
@@ -82,8 +82,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(accessoires).State = EntityState.Modified;
-                db.SaveChanges();
+                accessoiresRepository.EditAccessoire(accessoires);
                 return RedirectToAction("Index");
             }
             return View(accessoires);
@@ -96,7 +95,7 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Accessoires accessoires = db.Accessoires.Find(id);
+            Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)
             {
                 return HttpNotFound();
@@ -109,9 +108,8 @@ namespace BeestjeOpJeFeestje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Accessoires accessoires = db.Accessoires.Find(id);
-            db.Accessoires.Remove(accessoires);
-            db.SaveChanges();
+            Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
+            accessoiresRepository.DeleteAccessoire(accessoires);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +117,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                accessoiresRepository.Dispose();
             }
             base.Dispose(disposing);
         }
