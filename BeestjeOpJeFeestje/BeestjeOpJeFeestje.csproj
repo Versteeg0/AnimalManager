@@ -274,6 +274,7 @@
     <Content Include="Views\Accessoires\Details.cshtml" />
     <Content Include="Views\Accessoires\Edit.cshtml" />
     <Content Include="Views\Accessoires\Index.cshtml" />
+    <Content Include="Views\Boekings\Stap1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

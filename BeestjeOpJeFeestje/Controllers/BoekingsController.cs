@@ -114,6 +114,14 @@ namespace BeestjeOpJeFeestje.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Stap1(DateTime date)
+        {
+            var boeking = new Boeking();
+            boeking.Date = date;
+
+            return View(boeking);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -122,5 +130,7 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }
