@@ -1,4 +1,4 @@
-﻿@model BeestjeOpJeFeestje.Models.Accessoires
+﻿@model BeestjeOpJeFeestje.ViewModels.AccessoireVM
 
 @{
     ViewBag.Title = "Details";
@@ -27,16 +27,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
+            @Html.DisplayNameFor(model => model.ImagePath)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.imagePath)
+            @Html.DisplayFor(model => model.ImagePath)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Accessoire.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
