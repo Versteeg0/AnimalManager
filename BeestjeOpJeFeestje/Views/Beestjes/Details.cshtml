@@ -1,48 +1,30 @@
 ﻿@model BeestjeOpJeFeestje.Models.Beestje
 
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>Beestje</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagePath)
-        </dd>
-
-    </dl>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2>Details @Model.Name</h2>
+            <div class="row">
+                <img class="center-block" height="300" src='@Url.Content(Model.imagePath)' />
+                <div class="center-block">
+                    <dl>
+                        <dt>Naam </dt>
+                        <dd>@Model.Name</dd>
+                        <dt>Prijs: </dt>
+                        <dd>@Model.Price</dd>
+                        @if(@Model.AccessoireList != null)
+                         {
+                            <dt>Accessoires:</dt>
+                            foreach (var item in Model.AccessoireList)
+                            {
+                            <dd>item.Name</dd>
+                            }
+                         }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

@@ -8,6 +8,11 @@ namespace BeestjeOpJeFeestje.Models
 {
     public class Beestje
     {
+        public Beestje()
+        {
+            this.AccessoireList = new List<Accessoires>();
+        }
+
         [Key]
         public int Id { get; set; }
        
@@ -20,9 +25,10 @@ namespace BeestjeOpJeFeestje.Models
         public string Type { get; set; }
       
         [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(1, double.MaxValue, ErrorMessage ="Vul een waarde in die groter is dan 0")]
+        [Range(0.00, 9999.99, ErrorMessage ="Vul een waarde in die groter is dan 0 en kleiner dan 9999.99")]
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         [Display(Name = "Prijs")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
        
         [Required(ErrorMessage = "Vul hier het pad in van de foto")]
         [Display(Name = "Foto link")]

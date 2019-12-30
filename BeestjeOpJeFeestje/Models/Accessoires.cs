@@ -11,19 +11,12 @@ namespace BeestjeOpJeFeestje.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Naam is verplicht")]
-        [Display(Name = "Naam")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(1, int.MaxValue, ErrorMessage = "Vul een waarde in die groter is dan 0")]
-        [Display(Name = "Prijs")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Vul hier het pad in van de foto")]
-        [Display(Name = "Foto link")]
-        public string imagePath { get; set; }
+        public string ImagePath { get; set; }
 
-        public Beestje beest { get; set; }
+        public Beestje Beest { get; set; }
     }
 }

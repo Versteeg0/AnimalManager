@@ -187,6 +187,9 @@
     <Compile Include="Repos\BeestjesRepository.cs" />
     <Compile Include="Repos\BoekingRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccessoireVM.cs" />
+    <Compile Include="ViewModels\BeestjeVM.cs" />
+    <Compile Include="ViewModels\BoekingVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -260,7 +263,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Beestjes\Create.cshtml" />
     <Content Include="Views\Beestjes\Delete.cshtml" />
     <Content Include="Views\Beestjes\Details.cshtml" />
     <Content Include="Views\Beestjes\Edit.cshtml" />
@@ -275,6 +277,7 @@
     <Content Include="Views\Accessoires\Details.cshtml" />
     <Content Include="Views\Accessoires\Edit.cshtml" />
     <Content Include="Views\Accessoires\Index.cshtml" />
+    <Content Include="Views\Beestjes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
