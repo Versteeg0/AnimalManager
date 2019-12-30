@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeestjeOpJeFeestje.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,20 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        
+        public ActionResult GoToBoeking(DateTime date, Boeking boeking)
+        {
+            date = DateTime.Now;
+            
+
+            if (boeking != null)
+            {
+                boeking = new Boeking();
+                return RedirectToAction("Stap1", "Boekings");
+            }
             return View();
         }
     }

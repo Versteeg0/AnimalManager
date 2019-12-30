@@ -11,11 +11,13 @@
 </div>
 <div class="col-lg-12">
 
-    <form action="~/Views/Boekings/Create" method="post">
+    @using (@Html.BeginForm("GoToBoeking", "Home"))
+    {
         <input type="date" name="Date" /> <p />
+        
+        <input type="submit" value="GoToBoeking" class="btn btn-primary btn-lg">
 
-        <input type="submit" value="Boeken" class="btn btn-primary btn-lg">
-    </form>
+        <img src="~/Resources/field.png" align="right" />
+    }
 
-    <img src="~/Resources/field.png" align="right" />
 </div>
