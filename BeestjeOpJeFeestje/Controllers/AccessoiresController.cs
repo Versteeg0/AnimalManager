@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
+using BeestjeOpJeFeestje.ViewModels;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
@@ -18,7 +19,10 @@ namespace BeestjeOpJeFeestje.Controllers
         // GET: Accessoires
         public ActionResult Index()
         {
-            return View(accessoiresRepository.GetAccessoires());
+            List<AccessoireVM> accessoiresList = new List<AccessoireVM>();
+            foreach (Accessoires a in accessoiresRepository.GetAccessoires())
+                accessoiresList.Add(new AccessoireVM {Accessoire = a});
+            return View(accessoiresList);
         }
 
         // GET: Accessoires/Details/5
@@ -33,7 +37,9 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return HttpNotFound();
             }
-            return View(accessoires);
+            AccessoireVM accessoireVM = new AccessoireVM();
+            accessoireVM.Accessoire = accessoires;
+            return View(accessoireVM);
         }
 
         // GET: Accessoires/Create
@@ -47,7 +53,7 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,imagePath")] Accessoires accessoires)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,ImagePath")] AccessoireVM accessoires)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +76,9 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return HttpNotFound();
             }
-            return View(accessoires);
+            AccessoireVM accessoireVM = new AccessoireVM();
+            accessoireVM.Accessoire = accessoires;
+            return View(accessoireVM);
         }
 
         // POST: Accessoires/Edit/5
@@ -78,14 +86,14 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,imagePath")] Accessoires accessoires)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,ImagePath")] AccessoireVM model)
         {
             if (ModelState.IsValid)
             {
-                accessoiresRepository.EditAccessoire(accessoires);
+                accessoiresRepository.EditAccessoire(model);
                 return RedirectToAction("Index");
             }
-            return View(accessoires);
+            return View(model);
         }
 
         // GET: Accessoires/Delete/5

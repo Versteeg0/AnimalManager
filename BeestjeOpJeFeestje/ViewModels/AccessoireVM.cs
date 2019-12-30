@@ -11,16 +11,18 @@ namespace BeestjeOpJeFeestje.ViewModels
     {
         public Accessoires Accessoire { get; set; } = new Accessoires();
 
+        public int Id { get { return Accessoire.Id; } set { Accessoire.Id = value; } }
+
         [Required(ErrorMessage = "Naam is verplicht")]
         [Display(Name = "Naam")]
         public string Name { get { return Accessoire.Name; } set { Accessoire.Name = value; } }
 
-        [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(1, int.MaxValue, ErrorMessage = "Vul een waarde in die groter is dan 0")]
         [Display(Name = "Prijs")]
+        [Required(ErrorMessage = "Prijs is verplicht")]
+        [Range(typeof(decimal), "0", "100000.00", ErrorMessage = "Vul een decimale waarde in")]
+        [RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Vul een decimale waarde in")]
         public decimal Price { get { return Accessoire.Price; } set { Accessoire.Price = value; } }
 
-        [Required(ErrorMessage = "Vul hier het pad in van de foto")]
         [Display(Name = "Foto link")]
         public string ImagePath { get { return Accessoire.ImagePath; } set { Accessoire.ImagePath = value; } }
 
