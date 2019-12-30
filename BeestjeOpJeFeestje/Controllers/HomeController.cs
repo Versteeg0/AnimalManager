@@ -1,4 +1,5 @@
 ﻿using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,17 +30,12 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
         
-        public ActionResult GoToBoeking(DateTime date, Boeking boeking)
+        public ActionResult Stap1(DateTime date)
         {
-            date = DateTime.Now;
-            
+            BoekingVM boekingVM = new BoekingVM();
 
-            if (boeking != null)
-            {
-                boeking = new Boeking();
-                return RedirectToAction("Stap1", "Boekings");
-            }
-            return View();
+            boekingVM.Date = date;
+            return View(boekingVM);
         }
     }
 }

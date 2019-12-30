@@ -1,4 +1,5 @@
 ﻿using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,22 @@ namespace BeestjeOpJeFeestje.Repos
             return db.Boekings.Find(id);
         }
 
-        public void AddBoeking(Boeking boeking)
+        public void AddBoeking(BoekingVM boekingVM)
         {
+            Boeking boeking;
+
+            boeking = new Boeking();
             db.Boekings.Add(boeking);
+
+            boeking.FirstName = boekingVM.FirstName;
+            boeking.LastName = boekingVM.LastName;
+            boeking.Prefix = boekingVM.Prefix;
+            boeking.Email = boekingVM.Email;
+            boeking.Date = boekingVM.Date;
+
+            boeking.Accessoires = boekingVM.AccesoiresIds.Select(ai => db.Accessoires.Find(ai)).ToList();
+            boeking.Beestjes = boekingVM.BeestjesIds.Select(bi => db.Beestjes.Find(bi)).ToList();
+
             db.SaveChanges();
         }
 

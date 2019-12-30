@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
+using BeestjeOpJeFeestje.ViewModels;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
@@ -47,7 +48,7 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,FirstName,Prefix,LastName,Email")] Boeking boeking)
+        public ActionResult Create([Bind(Include = "Id,Date,FirstName,Prefix,LastName,Email")] BoekingVM boeking)
         {
             if (ModelState.IsValid)
             {
