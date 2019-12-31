@@ -16,6 +16,10 @@ namespace BeestjeOpJeFeestje.Repos
         {
             return db.Accessoires.ToList();
         }
+        public List<Beestje> GetBeestjes()
+        {
+            return db.Beestjes.ToList();
+        }
 
         public Accessoires GetAccessoireById(int? id)
         {
@@ -28,6 +32,7 @@ namespace BeestjeOpJeFeestje.Repos
             accessoire.Name = model.Name;
             accessoire.Price = model.Price;
             accessoire.ImagePath = model.ImagePath;
+            accessoire.Beest = db.Beestjes.Find(model.SelectedBeestjesId);
             db.Accessoires.Add(accessoire);
             db.SaveChanges();
         }

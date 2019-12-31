@@ -29,8 +29,6 @@ namespace BeestjeOpJeFeestje.Repos
             beestje.Price = beest.Price;
             beestje.ImagePath = beest.ImagePath;
             beestje.Type = beest.Type;
-            if(beest.AccessoireIds != null)
-            beestje.AccessoireList = beest.AccessoireIds.Select(ai => db.Accessoires.Find(ai)).ToList();
             db.Beestjes.Add(beestje);
             db.SaveChanges();
         }
@@ -42,8 +40,6 @@ namespace BeestjeOpJeFeestje.Repos
             beestje.Type = beest.Type;
             beestje.Price = beest.Price;
             beestje.ImagePath = beestje.ImagePath;
-            if(beest.AccessoireIds != null)
-            beestje.AccessoireList = beest.AccessoireIds.Select(ai => db.Accessoires.Find(ai)).ToList();
             db.Entry(beestje).State = EntityState.Modified;
             db.SaveChanges();
         }
@@ -53,6 +49,13 @@ namespace BeestjeOpJeFeestje.Repos
             db.Beestjes.Remove(beest);
             db.SaveChanges();
         }
+
+        public List<Accessoires> GetAccessoiresById(int id)
+        {
+            List<Accessoires> accessoires = db.Accessoires.Where(a => a.Beest.Id == id).ToList();
+            return accessoires;
+        }
+
 
         public void Dispose()
         {

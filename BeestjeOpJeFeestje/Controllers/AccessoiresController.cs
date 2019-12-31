@@ -49,7 +49,10 @@ namespace BeestjeOpJeFeestje.Controllers
         // GET: Accessoires/Create
         public ActionResult Create()
         {
-            return View();
+            var accessoireVM = new AccessoireVM();
+            accessoireVM.BeestjesLijst = accessoiresRepository.GetBeestjes();
+
+            return View(accessoireVM);
         }
 
         // POST: Accessoires/Create
@@ -57,7 +60,7 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,ImagePath")] AccessoireVM accessoires)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,ImagePath,SelectedBeestjesId")] AccessoireVM accessoires)
         {
             if (ModelState.IsValid)
             {
@@ -133,5 +136,21 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             base.Dispose(disposing);
         }
+
+  /*      private IEnumerable<SelectListItem> GetBeestjes()
+        {
+            List<Beestje> beestjes = accessoiresRepository.GetBeestjes();
+            var beestjeslijst = beestjes
+                                .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Id.ToString(),
+                                    Text = x.Name
+                                });
+                           
+
+
+            return new SelectList(beestjeslijst, "Value", "Text", 0);
+        }*/
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BeestjeOpJeFeestje.ViewModels
 {
@@ -26,6 +27,10 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Display(Name = "Foto link")]
         public string ImagePath { get { return Accessoire.ImagePath; } set { Accessoire.ImagePath = value; } }
 
+        [Display(Name = "Selecteer een beestje")]
+        [Required(ErrorMessage = "Selecteer een beestje")]
+        public int SelectedBeestjesId { get; set; }
+        public IEnumerable<Beestje> BeestjesLijst { get; set; }
         public Beestje Beest { get { return Accessoire.Beest; } set { Accessoire.Beest = value; } }
     }
 }

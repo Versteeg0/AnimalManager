@@ -15,9 +15,9 @@
                         @if(@Model.Beest.AccessoireList != null)
                          {
                             <dt>Accessoires:</dt>
-                            foreach (var item in Model.Beest.AccessoireList)
+                            foreach (var item in Model.AccessoiresList)
                             {
-                            <dd>item.Name</dd>
+                            <dd>@item.Name</dd>
                             }
                          }
                     </dl>

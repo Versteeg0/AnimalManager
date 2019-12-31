@@ -20,5 +20,6 @@ namespace BeestjeOpJeFeestje.Repos
        void DeleteBeestje(Beestje beest);
 
        void Dispose();
+       List<Accessoires> GetAccessoiresById(int id);
     }
 }

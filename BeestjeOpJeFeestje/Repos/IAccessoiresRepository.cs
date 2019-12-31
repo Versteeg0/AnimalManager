@@ -10,6 +10,7 @@ namespace BeestjeOpJeFeestje.Repos
     public interface IAccessoiresRepository
     {
         List<Accessoires> GetAccessoires();
+        List<Beestje> GetBeestjes();
         Accessoires GetAccessoireById(int? id);
         void CreateAccessoire(AccessoireVM model);
         void EditAccessoire(AccessoireVM accessoireVM);

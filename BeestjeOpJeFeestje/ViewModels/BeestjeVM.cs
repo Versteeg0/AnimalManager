@@ -32,6 +32,5 @@ namespace BeestjeOpJeFeestje.ViewModels
         public string ImagePath { get { return Beest.ImagePath; } set { Beest.ImagePath = value; } }
 
         public List<Accessoires> AccessoiresList { get; set; } = new List<Accessoires>();
-        public int[] AccessoireIds { get; set; }
     }
 }
