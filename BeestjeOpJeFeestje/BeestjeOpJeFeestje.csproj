@@ -283,6 +283,9 @@
     <Content Include="Views\Accessoires\Index.cshtml" />
     <Content Include="Views\Beestjes\Create.cshtml" />
     <Content Include="Views\Home\Stap1.cshtml" />
+    <Content Include="Views\Home\Stap2.cshtml" />
+    <Content Include="Views\Home\Stap3.cshtml" />
+    <Content Include="Views\Home\Stap4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
