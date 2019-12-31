@@ -14,7 +14,12 @@ namespace BeestjeOpJeFeestje.Controllers
 {
     public class BoekingsController : Controller
     {
-        private BoekingRepository boekingRepository = new BoekingRepository();
+        private readonly IBoekingRepository boekingRepository;
+
+        public BoekingsController(IBoekingRepository repo)
+        {
+            boekingRepository = repo;
+        }
 
         // GET: Boekings
         public ActionResult Index()
