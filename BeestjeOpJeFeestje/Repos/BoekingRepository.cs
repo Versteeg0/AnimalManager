@@ -46,6 +46,16 @@ namespace BeestjeOpJeFeestje.Repos
             db.SaveChanges();
         }
 
+        public List<Beestje> GetBeestjes()
+        {
+            return db.Beestjes.ToList();
+        }
+
+        public List<Accessoires> GetAccessoires()
+        {
+            return db.Accessoires.ToList();
+        }
+
         public void Dispose()
         {
             db.Dispose();

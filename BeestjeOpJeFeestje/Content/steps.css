@@ -25,29 +25,9 @@
         width: 24%;
     }
 
-    ol.progtrckr[data-progtrckr-steps="5"] li {
-        width: 19%;
-    }
-
-    ol.progtrckr[data-progtrckr-steps="6"] li {
-        width: 16%;
-    }
-
-    ol.progtrckr[data-progtrckr-steps="7"] li {
-        width: 14%;
-    }
-
-    ol.progtrckr[data-progtrckr-steps="8"] li {
-        width: 12%;
-    }
-
-    ol.progtrckr[data-progtrckr-steps="9"] li {
-        width: 11%;
-    }
-
     ol.progtrckr li.progtrckr-done {
-        color: black;
-        border-bottom: 4px solid yellowgreen;
+        color: cornflowerblue;
+        border-bottom: 4px solid;
     }
 
     ol.progtrckr li.progtrckr-todo {

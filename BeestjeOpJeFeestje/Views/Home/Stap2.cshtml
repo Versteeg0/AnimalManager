@@ -12,9 +12,11 @@
         <li class="progtrckr-todo">Bevestig</li>
     </ol>
 </div>
-<div class=""
-<div class="col-lg-12">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" name="BtnNext" value="Ga door naar stap 3" class="btn btn-default" />
+@using (Html.BeginForm("Stap3", "Home"))
+{
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" name="BtnNext" value="Ga door naar stap 3" class="btn btn-default" />
+        </div>
     </div>
-</div>
+}
