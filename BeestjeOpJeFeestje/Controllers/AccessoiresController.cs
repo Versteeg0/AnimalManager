@@ -14,8 +14,12 @@ namespace BeestjeOpJeFeestje.Controllers
 {
     public class AccessoiresController : Controller
     {
-        public AccessoiresRepository accessoiresRepository = new AccessoiresRepository();
+        private readonly IAccessoiresRepository accessoiresRepository;
 
+        public AccessoiresController(IAccessoiresRepository repo)
+        {
+            accessoiresRepository = repo;
+        }
         // GET: Accessoires
         public ActionResult Index()
         {

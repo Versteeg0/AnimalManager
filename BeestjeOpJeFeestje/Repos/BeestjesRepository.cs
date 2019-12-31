@@ -8,7 +8,7 @@ using System.Web;
 
 namespace BeestjeOpJeFeestje.Repos
 {
-    public class BeestjesRepository
+    public class BeestjesRepository : IBeestjesRepository
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

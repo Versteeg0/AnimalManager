@@ -14,8 +14,12 @@ namespace BeestjeOpJeFeestje.Controllers
 {
     public class BeestjesController : Controller
     {
-        private BeestjesRepository beestjesRepository = new BeestjesRepository();
+        private readonly IBeestjesRepository beestjesRepository;
 
+        public BeestjesController(IBeestjesRepository repo)
+        {
+            beestjesRepository = repo;
+        }
         // GET: Beestjes
         public ActionResult Index()
         {

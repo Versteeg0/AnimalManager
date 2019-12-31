@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BeestjeOpJeFeestje.Repos
 {
-    public class BoekingRepository
+    public class BoekingRepository : IBoekingRepository
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
