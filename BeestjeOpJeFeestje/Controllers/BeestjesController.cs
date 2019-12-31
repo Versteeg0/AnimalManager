@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
+using BeestjeOpJeFeestje.ViewModels;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
@@ -18,7 +19,10 @@ namespace BeestjeOpJeFeestje.Controllers
         // GET: Beestjes
         public ActionResult Index()
         {
-            return View(beestjesRepository.GetBeestjes());
+            List<BeestjeVM> beestList = new List<BeestjeVM>();
+            foreach (Beestje b in beestjesRepository.GetBeestjes())
+                beestList.Add(new BeestjeVM { Beest = b });
+            return View(beestList);
         }
 
         // GET: Beestjes/Details/5
@@ -33,7 +37,9 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return HttpNotFound();
             }
-            return View(beestje);
+            BeestjeVM beestjeVM = new BeestjeVM();
+            beestjeVM.Beest = beestje;
+            return View(beestjeVM);
         }
 
         // GET: Beestjes/Create
@@ -45,10 +51,16 @@ namespace BeestjeOpJeFeestje.Controllers
         // POST: Beestjes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Type,Price,imagePath")] Beestje beestje)
+        public ActionResult Create([Bind(Include = "Id,Name,Type,Price,imagePath")] BeestjeVM beestje)
         {
             if (ModelState.IsValid)
             {
+                string[] validTypes = new string[] { "Woestijn", "Boerderij", "Sneeuw", "Jungle" };
+                if (!validTypes.Contains(beestje.Type))
+                {
+                    ViewBag.Error ="Kies uit de types Woestijn, Boerderij, Sneeuw of Jungle.";
+                    return View();
+                }
                 beestjesRepository.AddBeestje(beestje);
                 return RedirectToAction("Index");
             }
@@ -67,7 +79,9 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return HttpNotFound();
             }
-            return View(beestje);
+            BeestjeVM beestjeVM = new BeestjeVM();
+            beestjeVM.Beest = beestje;
+            return View(beestjeVM);
         }
 
         // POST: Beestjes/Edit/5
@@ -75,10 +89,16 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Type,Price,imagePath")] Beestje beestje)
+        public ActionResult Edit([Bind(Include = "Id,Name,Type,Price,imagePath")] BeestjeVM beestje)
         {
             if (ModelState.IsValid)
             {
+                string[] validTypes = new string[] { "Woestijn", "Boerderij", "Sneeuw", "Jungle" };
+                if (!validTypes.Contains(beestje.Type))
+                {
+                    ViewBag.Error = "Kies uit de types Woestijn, Boerderij, Sneeuw of Jungle.";
+                    return View();
+                }
                 beestjesRepository.EditBeestje(beestje);
                 return RedirectToAction("Index");
             }

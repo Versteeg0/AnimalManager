@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BeestjeOpJeFeestje.Models.Beestje>
+﻿@model IEnumerable<BeestjeOpJeFeestje.ViewModels.BeestjeVM>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.imagePath)
+            @Html.DisplayNameFor(model => model.ImagePath)
         </th>
         <th></th>
     </tr>
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            <img src='@Url.Content(item.imagePath)' height="50"/>
+            <img src='@Url.Content(item.ImagePath)' height="50"/>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

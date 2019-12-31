@@ -1,4 +1,5 @@
 ﻿using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,15 +22,29 @@ namespace BeestjeOpJeFeestje.Repos
             return db.Beestjes.Find(id);
         }
 
-        public void AddBeestje(Beestje beest)
+        public void AddBeestje(BeestjeVM beest)
         {
-            db.Beestjes.Add(beest);
+            Beestje beestje = new Beestje();
+            beestje.Name = beest.Name;
+            beestje.Price = beest.Price;
+            beestje.ImagePath = beest.ImagePath;
+            beestje.Type = beest.Type;
+            if(beest.AccessoireIds != null)
+            beestje.AccessoireList = beest.AccessoireIds.Select(ai => db.Accessoires.Find(ai)).ToList();
+            db.Beestjes.Add(beestje);
             db.SaveChanges();
         }
 
-        public void EditBeestje(Beestje beest)
+        public void EditBeestje(BeestjeVM beest)
         {
-            db.Entry(beest).State = EntityState.Modified;
+            Beestje beestje = db.Beestjes.First(b => b.Id == beest.Id);
+            beestje.Name = beest.Name;
+            beestje.Type = beest.Type;
+            beestje.Price = beest.Price;
+            beestje.ImagePath = beestje.ImagePath;
+            if(beest.AccessoireIds != null)
+            beestje.AccessoireList = beest.AccessoireIds.Select(ai => db.Accessoires.Find(ai)).ToList();
+            db.Entry(beestje).State = EntityState.Modified;
             db.SaveChanges();
         }
 
