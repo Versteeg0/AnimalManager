@@ -17,6 +17,10 @@ namespace BeestjeOpJeFeestje.Repos
 
         void RemoveBoeking(Boeking boeking);
 
+        List<Beestje> GetBeestjes();
+
+        List<Accessoires> GetAccessoires();
+
         void Dispose();
     }
 }
