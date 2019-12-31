@@ -1,4 +1,5 @@
 ﻿using BeestjeOpJeFeestje.Models;
+using BeestjeOpJeFeestje.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace BeestjeOpJeFeestje.Repos
 
         Boeking GetBoekingById(int? id);
 
-        void AddBoeking(Boeking boeking);
+        void AddBoeking(BoekingVM boekingVM);
 
         void RemoveBoeking(Boeking boeking);
 
