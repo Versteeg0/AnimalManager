@@ -37,12 +37,13 @@ namespace BeestjeOpJeFeestje.Repos
             db.SaveChanges();
         }
 
-        public void EditAccessoire(AccessoireVM accessoireVM)
+        public void EditAccessoire(AccessoireVM model)
         {
-            Accessoires accessoire = db.Accessoires.First(a => a.Id == accessoireVM.Id);
-            accessoire.Name = accessoireVM.Name;
-            accessoire.Price = accessoireVM.Price;
-            accessoire.ImagePath = accessoireVM.ImagePath;
+            Accessoires accessoire = db.Accessoires.First(a => a.Id == model.Id);
+            accessoire.Name = model.Name;
+            accessoire.Price = model.Price;
+            accessoire.ImagePath = model.ImagePath;
+            accessoire.Beest = db.Beestjes.Find(model.SelectedBeestjesId);
             db.Entry(accessoire).State = EntityState.Modified;
             db.SaveChanges();
         }

@@ -85,6 +85,7 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             AccessoireVM accessoireVM = new AccessoireVM();
             accessoireVM.Accessoire = accessoires;
+            accessoireVM.BeestjesLijst = accessoiresRepository.GetBeestjes();
             return View(accessoireVM);
         }
 
@@ -93,7 +94,7 @@ namespace BeestjeOpJeFeestje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,ImagePath")] AccessoireVM model)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,ImagePath,SelectedBeestjesId")] AccessoireVM model)
         {
             if (ModelState.IsValid)
             {

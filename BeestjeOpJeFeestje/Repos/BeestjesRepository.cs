@@ -39,7 +39,7 @@ namespace BeestjeOpJeFeestje.Repos
             beestje.Name = beest.Name;
             beestje.Type = beest.Type;
             beestje.Price = beest.Price;
-            beestje.ImagePath = beestje.ImagePath;
+            beestje.ImagePath = beest.ImagePath;
             db.Entry(beestje).State = EntityState.Modified;
             db.SaveChanges();
         }
