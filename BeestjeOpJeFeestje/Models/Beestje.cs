@@ -24,6 +24,8 @@ namespace BeestjeOpJeFeestje.Models
        
         public string ImagePath { get; set; }
 
+        public bool IsSelected { get; set; }
+
         public ICollection<Accessoires> AccessoireList { get; set; }
 
     }

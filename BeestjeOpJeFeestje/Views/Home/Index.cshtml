@@ -1,4 +1,4 @@
-﻿@model BeestjeOpJeFeestje.Models.Boeking
+﻿@model BeestjeOpJeFeestje.ViewModels.BoekingVM
 
 @{
     ViewBag.Title = "Home Page";
@@ -13,11 +13,11 @@
 
     @using (@Html.BeginForm("Stap1", "Home"))
     {
-        <input type="date" name="Date" /> <p/>
-        
+        <input type="date" name="Date" />
+        <p/>
         <input type="submit" value="Boeken" class="btn btn-primary btn-lg">
 
-        <img src="~/Resources/field.png" align="right" />
     }
+    <img src="~/Resources/field.png" align="right" />
 
 </div>

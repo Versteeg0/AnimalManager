@@ -192,6 +192,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Beestje.cs" />
     <Compile Include="Models\Boeking.cs" />
+    <Compile Include="Models\ContextInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Views\Home\Stap2.cshtml" />
     <Content Include="Views\Home\Stap3.cshtml" />
     <Content Include="Views\Home\Stap4.cshtml" />
+    <Content Include="Views\Home\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,32 +19,20 @@ namespace BeestjeOpJeFeestje.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            var boekingVM = new BoekingVM();
+            return View(boekingVM);
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         
-        public ActionResult Stap1(DateTime date)
+        public ActionResult Stap1(BoekingVM boekingVM)
         {
-            BoekingVM boekingVM = new BoekingVM();
+            if(boekingVM.Date < DateTime.Now)
+            {
+                return RedirectToAction("Index");
+            }
 
             var beestjes = boekingRepository.GetBeestjes();
             boekingVM.Beestjes = beestjes;
 
-            boekingVM.Date = date;
             return View(boekingVM);
         }
 
