@@ -12,7 +12,7 @@ namespace BeestjeOpJeFeestje.ViewModels
         public Boeking BoekingModel { get; set; } = new Boeking();
         public List<Accessoires> Accessoires { get; set; } = new List<Accessoires>();
        // public List<Beestje> Beestjes { get; set; } = new List<Beestje>();
-        public List<Beestje> Beestjes { get; set; } = new List<Beestje>();
+        public List<BeestjeVM> Beestjes { get; set; } = new List<BeestjeVM>();
 
         [Required]
         [Display(Name = "Selecteer de gewenste beestjes")]
@@ -21,6 +21,7 @@ namespace BeestjeOpJeFeestje.ViewModels
 
         [Required]
         [Display(Name = "Datum")]
+        [DataType(DataType.Date)]
         public DateTime Date { get { return BoekingModel.Date; } set { BoekingModel.Date = value; } }
 
         [Required(ErrorMessage = "Voornaam is verplicht")]

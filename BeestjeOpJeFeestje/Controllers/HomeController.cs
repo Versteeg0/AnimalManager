@@ -20,6 +20,7 @@ namespace BeestjeOpJeFeestje.Controllers
         public ActionResult Index()
         {
             var boekingVM = new BoekingVM();
+
             return View(boekingVM);
         }
         
@@ -29,9 +30,15 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return RedirectToAction("Index");
             }
-
+            
             var beestjes = boekingRepository.GetBeestjes();
-            boekingVM.Beestjes = beestjes;
+            List<BeestjeVM> beestlijst = new List<BeestjeVM>();
+            
+            foreach(var b in beestjes)
+            {
+                beestlijst.Add(new BeestjeVM { Beest = b });
+            }
+            boekingVM.Beestjes = beestlijst;
 
             return View(boekingVM);
         }

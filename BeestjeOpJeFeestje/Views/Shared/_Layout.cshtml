@@ -6,6 +6,8 @@
     <title>Beestje op je feestje</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/steps.css")" rel="stylesheet" type="text/css" />
+
 
 </head>
 <body>
@@ -31,7 +33,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr style="width:100%;" />
         <footer>
             <p>&copy; @DateTime.Now.Year - Made by: Lars Versteeg & Rico Bender</p>
         </footer>
