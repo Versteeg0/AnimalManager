@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Festispec.DesktopApp.Code_Generation;
+using Festispec.Domain;
+using GalaSoft.MvvmLight;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+
+namespace Festispec.DesktopApp.ViewModel.ModelWrapper
+{
+    public class PlanningViewModel : ViewModelBase
+    {
+        private Planning planning;       
+        private string employeeName;
+        private DateTime availabilityDate;
+        public PlanningViewModel(Availability availability, Inspection inspection)
+        {
+            this.planning = new Planning();
+            planning.AvailabilityId = availability.Id;            
+            this.availabilityDate = availability.Date;
+            using (var context = new Entities())
+            {
+                Employee employee = context.Employees.Find(availability.EmployeeId);
+                if (employee.Insertion == null)
+                    this.employeeName = employee.FirstName + " " + employee.LastName;
+                this.employeeName = employee.FirstName + " " + employee.Insertion + " " + employee.LastName;
+
+                //NEEDS TO BE CHANGED TO CALCULATION THROUGH API, INSTEAD OF DIRECT DISTANCE
+                string inspectionLong = context.Events.Find(inspection.EventId).Address.Longitude;
+                string inspectionLat = context.Events.Find(inspection.EventId).Address.Latitude;
+                string employeeLong = context.Addresses.Find(employee.AddressId).Longitude;
+                string employeeLat = context.Addresses.Find(employee.AddressId).Latitude;
+
+                string getDistance = APICall(inspectionLong, inspectionLat, employeeLong, employeeLat);
+
+                TravelDistance = Int32.Parse(getDistance);
+            }
+            planning.InspectionId = inspection.Id;                        
+        }       
+
+        public PlanningViewModel(Planning planning)
+        {
+            this.planning = planning;
+        }
+
+        public AvailabilityViewModel AvailabilityObject => new AvailabilityViewModel(planning.Availability);
+
+        /*planning properties*/
+        public int TravelDistance
+        {
+            get { return (int)planning.TravelDistance; }
+            set { planning.TravelDistance = value; RaisePropertyChanged("TravelDistance"); }
+        }
+        /*availability properties*/
+        public int AvailabilityId
+        {
+            get { return planning.AvailabilityId; }
+        }
+        public int EmployeeId
+        {
+            get { return planning.Availability.EmployeeId; }
+            set { planning.Availability.EmployeeId = value; RaisePropertyChanged("EmployeeId"); }
+        }
+        public DateTime Availability
+        {
+            get { return availabilityDate; }
+        }
+        public string EmployeeName
+        {
+            get { return this.employeeName; }
+        }  
+        /*TOPOCOS*/
+        public Inspection InspectionToPoco()
+        {
+            return planning.Inspection;
+        }
+        public Availability AvailabilityToPoco()
+        {
+            return planning.Availability;
+        }
+        public Planning PlanningToPoco()
+        {
+            return planning;
+        }
+
+        public string APICall(string long1, string lat1, string long2, string lat2)
+        {
+            //API call to BING Maps service
+            string apiCall = "http://dev.virtualearth.net/REST/v1/Routes/Driving?wayPoint.1=" + long1 + "," + lat1 + "&waypoint.2=" + long2 + "," + lat2 + "&optimize=time&routeAttributes=routeSummariesOnly&key=Ah-N674YdoVh8OYdQm1g0JiexsZ6_Cmmqph5XQqIY7rAnX-FJHjHdDrhfvhWBgLX";
+
+            //Webclient request and response
+            var client = new RestClient(apiCall);
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+
+            //Makes the request into an object
+            JObject obj = JObject.Parse(response.Content);
+
+            var data = obj.Children().ToList()[3];
+            var test = data.ToString();
+
+            string jsonstring = test.ToString().Substring(test.ToString().IndexOf("travelDuration"), test.ToString().Length - test.ToString().IndexOf("TravelDuration") - 1);
+
+            return jsonstring;
+        }
+
+    }
+}

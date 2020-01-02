@@ -17,11 +17,26 @@
     <div class="row">
         <div class="col-lg-7 left" style="border:solid 2px lightgray">
             <div class="stepbox col-sm-12" style="background-color: lightgray">
-                <p>Stap 2 - Selecteer de gewenste accessoires</p>
+                <p>Stap 2 - Kies je accessoires</p>
             </div>
             <div class="stepboxcontent">
                 @using (Html.BeginForm("Stap3", "Home"))
                 {
+                    @Html.HiddenFor(model => model.Date)
+                    for (int i = 0; i < Model.Accessoires.Count; i++)
+                    {
+                        <div class="col-sm-3 animallist">
+                            <div class="panel-heading animaltekst">
+                                @Html.DisplayFor(model => model.Accessoires[i].Name)
+                                <p />
+                                @Html.CheckBoxFor(model => model.Beestjes[i].IsSelected)
+                            </div>
+                            <div class="panel-footer animaltekst">
+                                @Html.HiddenFor(model => model.Accessoires[i].Id)
+                                @Html.DisplayFor(model => model.Accessoires[i].Price)
+                            </div>
+                        </div>
+                    }
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" name="BtnNext" value="Ga door naar stap 3" class="btn btn-default" />

@@ -47,22 +47,28 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap2(BoekingVM model)
         {
-                BoekingVM boekingVM = model;
-                foreach (BeestjeVM b in boekingVM.Beestjes)
+            BoekingVM boekingVM = model;
+            foreach (BeestjeVM b in boekingVM.Beestjes)
                 {
-                    if (b.IsSelected && BoekingHasNoBeestje(b.Beest))
-                    {
-                        boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(b.Id));
-                    }
-                }
+                  if (b.IsSelected && BoekingHasNoBeestje(b.Beest))
+                  {
+                      boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(b.Id));
+                  }
+              }
 
-                if (boekingVM.SelectedBeestjes.Count == 0)
+                if (boekingVM.SelectedAccessoires.Count == 0)
                 {
-                    ViewBag.Error = "Selecteer minimaal een beestje voor je boeking.";
-                    return RedirectToAction("Stap1", boekingVM);
+                    ViewBag.Error = "Selecteer minimaal een Accessoire voor je boeking.";
+                    return RedirectToAction("Stap2", boekingVM);
                 }
 
                 var accessoires = boekingRepository.GetAccessoires();
+                List<AccessoireVM> accessoirelijst = new List<AccessoireVM>();
+
+            foreach (var a in accessoires)
+            {
+                accessoirelijst.Add(new AccessoireVM { Accessoire = a });
+            }
                 boekingVM.Accessoires = accessoires;
 
                 return View(boekingVM);
