@@ -29,7 +29,7 @@
                             <div class="panel-heading animaltekst">
                                 @Html.DisplayFor(model => model.Accessoires[i].Name)
                                 <p />
-                                @Html.CheckBoxFor(model => model.Beestjes[i].IsSelected)
+                                @Html.CheckBoxFor(model => model.Accessoires[i].IsSelected)
                             </div>
                             <div class="panel-footer animaltekst">
                                 @Html.HiddenFor(model => model.Accessoires[i].Id)

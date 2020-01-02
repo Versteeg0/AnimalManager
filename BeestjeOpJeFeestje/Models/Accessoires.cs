@@ -18,5 +18,7 @@ namespace BeestjeOpJeFeestje.Models
         public string ImagePath { get; set; }
 
         public Beestje Beest { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace BeestjeOpJeFeestje.ViewModels
 
         [Display(Name = "Foto link")]
         public string ImagePath { get { return Accessoire.ImagePath; } set { Accessoire.ImagePath = value; } }
+        public bool IsSelected { get { return Accessoire.IsSelected; } set { Accessoire.IsSelected = value; } }
 
         [Display(Name = "Selecteer een beestje")]
         [Required(ErrorMessage = "Selecteer een beestje")]
