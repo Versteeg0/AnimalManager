@@ -137,21 +137,5 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             base.Dispose(disposing);
         }
-
-  /*      private IEnumerable<SelectListItem> GetBeestjes()
-        {
-            List<Beestje> beestjes = accessoiresRepository.GetBeestjes();
-            var beestjeslijst = beestjes
-                                .Select(x =>
-                                new SelectListItem
-                                {
-                                    Value = x.Id.ToString(),
-                                    Text = x.Name
-                                });
-                           
-
-
-            return new SelectList(beestjeslijst, "Value", "Text", 0);
-        }*/
     }
 }

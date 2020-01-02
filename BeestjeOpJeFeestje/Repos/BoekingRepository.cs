@@ -34,8 +34,8 @@ namespace BeestjeOpJeFeestje.Repos
             boeking.Email = boekingVM.Email;
             boeking.Date = boekingVM.Date;
 
-            boeking.Accessoires = boekingVM.AccesoiresIds.Select(ai => db.Accessoires.Find(ai)).ToList();
-            boeking.Beestjes = boekingVM.BeestjesIds.Select(bi => db.Beestjes.Find(bi)).ToList();
+            boeking.Accessoires = boekingVM.SelectedAccessoires;
+            boeking.Beestjes = boekingVM.SelectedBeestjes;
 
             db.SaveChanges();
         }
@@ -61,6 +61,9 @@ namespace BeestjeOpJeFeestje.Repos
             db.Dispose();
         }
 
-
+        public Beestje GetBeestjeById(int id)
+        {
+            return db.Beestjes.Find(id);
+        }
     }
 }

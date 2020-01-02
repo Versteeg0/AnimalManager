@@ -23,11 +23,15 @@ namespace BeestjeOpJeFeestje.Controllers
 
             return View(boekingVM);
         }
-        
-        public ActionResult Stap1(BoekingVM boekingVM)
+
+        public ActionResult Stap1(BoekingVM model)
         {
+            BoekingVM boekingVM = new BoekingVM();
+            boekingVM.Date = model.Date;
+            boekingVM.Date = model.Date;
             if(boekingVM.Date < DateTime.Now)
             {
+                ViewBag.Error = "Selecteer een datum om een boeking aan te maken.";
                 return RedirectToAction("Index");
             }
             
@@ -43,12 +47,27 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
-        public ActionResult Stap2(BoekingVM boekingVM)
+        public ActionResult Stap2(BoekingVM model)
         {
-            var accessoires = boekingRepository.GetAccessoires();
-            boekingVM.Accessoires = accessoires;
+                BoekingVM boekingVM = model;
+                foreach (BeestjeVM b in boekingVM.Beestjes)
+                {
+                    if (b.IsSelected && BoekingHasNoBeestje(b.Beest))
+                    {
+                        boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(b.Id));
+                    }
+                }
 
-            return View(boekingVM) ;
+                if (boekingVM.SelectedBeestjes.Count == 0)
+                {
+                    ViewBag.Error = "Selecteer minimaal een beestje voor je boeking.";
+                    return RedirectToAction("Stap1", boekingVM);
+                }
+
+                var accessoires = boekingRepository.GetAccessoires();
+                boekingVM.Accessoires = accessoires;
+
+                return View(boekingVM);
         }
 
         public ActionResult Stap3(BoekingVM boekingVM)
@@ -69,7 +88,20 @@ namespace BeestjeOpJeFeestje.Controllers
         {
 
 
-            return View(boekingVM);
+            return View();
+        }
+
+
+        public bool BoekingHasNoBeestje(Beestje b)
+        {
+            foreach(Boeking boeking in boekingRepository.GetAllBoeking())
+            {
+                if (boeking.Beestjes.Contains(b))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

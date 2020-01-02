@@ -69,7 +69,7 @@
 .left {
     top: 10px;
     float: left;
-    margin-right: 260px;
+    margin-right: 160px;
 }
 
 .right {
@@ -87,5 +87,17 @@
 
 .stepboxcontent{
     margin-top: 30px;
+}
+
+.animallist {
+    border: solid 2px lightgray;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-bottom: 3px;
+    align-items:center;
+}
+
+.animaltekst{
+    text-align: center;
 }
 

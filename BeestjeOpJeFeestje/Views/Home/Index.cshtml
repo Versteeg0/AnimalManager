@@ -10,11 +10,14 @@
 
 </div>
 <div class="col-lg-12">
-
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red">@ViewBag.Error</p>
+    }
     @using (@Html.BeginForm("Stap1", "Home"))
     {
         <input type="date" name="Date" />
-        <p/>
+        <p />
         <input type="submit" value="Boeken" class="btn btn-primary btn-lg">
 
     }

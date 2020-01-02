@@ -21,6 +21,7 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Display(Name ="Type")]
         public string Type { get { return Beest.Type; } set { Beest.Type = value; } }
 
+        [DisplayFormat(DataFormatString = "€ {0:n}")]
         [Required(ErrorMessage = "Prijs is verplicht")]
         [RegularExpression(@"^\d+\.\d{0,2}$")]
         [Range(0, 9999999999999999.99)]

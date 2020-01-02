@@ -14,14 +14,12 @@ namespace BeestjeOpJeFeestje.ViewModels
        // public List<Beestje> Beestjes { get; set; } = new List<Beestje>();
         public List<BeestjeVM> Beestjes { get; set; } = new List<BeestjeVM>();
 
-        [Required]
-        [Display(Name = "Selecteer de gewenste beestjes")]
-        public int[] BeestjesIds { get; set; }
-        public int[] AccesoiresIds { get; set; }
+        public List<Beestje> SelectedBeestjes { get; set; } = new List<Beestje>();
+        public List<Accessoires> SelectedAccessoires { get; set; } = new List<Accessoires>();
 
         [Required]
         [Display(Name = "Datum")]
-        [DataType(DataType.Date)]
+     //   [DataType(DataType.Date)]
         public DateTime Date { get { return BoekingModel.Date; } set { BoekingModel.Date = value; } }
 
         [Required(ErrorMessage = "Voornaam is verplicht")]
