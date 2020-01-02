@@ -26,9 +26,7 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap1(BoekingVM model)
         {
-            BoekingVM boekingVM = new BoekingVM();
-            boekingVM.Date = model.Date;
-            boekingVM.Date = model.Date;
+            BoekingVM boekingVM = model;
             if(boekingVM.Date < DateTime.Now)
             {
                 ViewBag.Error = "Selecteer een datum om een boeking aan te maken.";
