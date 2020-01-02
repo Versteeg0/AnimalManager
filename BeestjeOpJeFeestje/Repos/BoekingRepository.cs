@@ -13,7 +13,7 @@ namespace BeestjeOpJeFeestje.Repos
 
         public List<Boeking> GetAllBoeking()
         {
-            return db.Boekings.ToList();
+            return db.Boekings.Include("Beestjes").ToList();
         }
 
         public Boeking GetBoekingById(int? id)
@@ -64,6 +64,10 @@ namespace BeestjeOpJeFeestje.Repos
         public Beestje GetBeestjeById(int id)
         {
             return db.Beestjes.Find(id);
+        }
+        public Accessoires GetAccessoireById(int id)
+        {
+            return db.Accessoires.Find(id);
         }
     }
 }

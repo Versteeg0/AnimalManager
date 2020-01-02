@@ -49,29 +49,30 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             BoekingVM boekingVM = model;
             foreach (BeestjeVM b in boekingVM.Beestjes)
-                {
-                  if (b.IsSelected && BoekingHasNoBeestje(b.Beest))
+            {
+                  if (b.IsSelected && BeestjeHasNoBoeking(b.Beest))
                   {
                       boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(b.Id));
                   }
-              }
-
-                if (boekingVM.SelectedAccessoires.Count == 0)
-                {
-                    ViewBag.Error = "Selecteer minimaal een Accessoire voor je boeking.";
-                    return RedirectToAction("Stap2", boekingVM);
-                }
-
-                var accessoires = boekingRepository.GetAccessoires();
-                List<AccessoireVM> accessoirelijst = new List<AccessoireVM>();
-
-            foreach (var a in accessoires)
-            {
-                accessoirelijst.Add(new AccessoireVM { Accessoire = a });
             }
-                boekingVM.Accessoires = accessoires;
 
-                return View(boekingVM);
+            if (boekingVM.SelectedBeestjes.Count == 0)
+            {
+                ViewBag.Error = "Selecteer minimaal een Accessoire voor je boeking.";
+                return RedirectToAction("Stap1", boekingVM);
+            }
+
+            List<Accessoires> list = boekingRepository.GetAccessoires();
+            foreach(Beestje beest in boekingVM.SelectedBeestjes)
+            {
+                foreach(Accessoires a in list)
+                {
+                    if(a.Beest == beest)
+                    boekingVM.Accessoires.Add(a);
+                }
+            }
+
+            return View(boekingVM);
         }
 
         public ActionResult Stap3(BoekingVM boekingVM)
@@ -96,11 +97,11 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
 
-        public bool BoekingHasNoBeestje(Beestje b)
+        public bool BeestjeHasNoBoeking(Beestje b)
         {
             foreach(Boeking boeking in boekingRepository.GetAllBoeking())
             {
-                if (boeking.Beestjes.Contains(b))
+                if (boeking.Beestjes != null && boeking.Beestjes.FirstOrDefault(beest => beest.Id == b.Id) != null)
                 {
                     return false;
                 }

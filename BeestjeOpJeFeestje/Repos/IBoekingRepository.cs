@@ -23,5 +23,6 @@ namespace BeestjeOpJeFeestje.Repos
 
         void Dispose();
         Beestje GetBeestjeById(int id);
+        Accessoires GetAccessoireById(int id);
     }
 }

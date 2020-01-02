@@ -33,6 +33,11 @@ namespace BeestjeOpJeFeestje.Models
             context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(5)});
             context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Dansschoenen", Price = 2.00m, Beest = context.Beestjes.Find(10)});
             context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(12)});
+
+            var boeking = new Boeking() { Id = 1, FirstName = "lars", LastName = "versteeg", Date = DateTime.Now};
+            var beestje = context.Beestjes.Find(1);
+            boeking.Beestjes.Add(beestje);
+            context.Boekings.Add(boeking);
           
             context.SaveChanges();
         }

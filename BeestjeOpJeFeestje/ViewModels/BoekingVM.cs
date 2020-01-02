@@ -11,7 +11,6 @@ namespace BeestjeOpJeFeestje.ViewModels
     {
         public Boeking BoekingModel { get; set; } = new Boeking();
         public List<Accessoires> Accessoires { get; set; } = new List<Accessoires>();
-       // public List<Beestje> Beestjes { get; set; } = new List<Beestje>();
         public List<BeestjeVM> Beestjes { get; set; } = new List<BeestjeVM>();
 
         public List<Beestje> SelectedBeestjes { get; set; } = new List<Beestje>();
