@@ -118,3 +118,14 @@
     background-color: darkgray;
 }
 
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.stap3Form {
+    margin-top: 60px;
+}

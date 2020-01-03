@@ -287,10 +287,8 @@
     <Content Include="Views\Beestjes\Details.cshtml" />
     <Content Include="Views\Beestjes\Edit.cshtml" />
     <Content Include="Views\Beestjes\Index.cshtml" />
-    <Content Include="Views\Boekings\Create.cshtml" />
     <Content Include="Views\Boekings\Delete.cshtml" />
     <Content Include="Views\Boekings\Details.cshtml" />
-    <Content Include="Views\Boekings\Edit.cshtml" />
     <Content Include="Views\Boekings\Index.cshtml" />
     <Content Include="Views\Accessoires\Create.cshtml" />
     <Content Include="Views\Accessoires\Delete.cshtml" />

@@ -30,11 +30,15 @@ namespace BeestjeOpJeFeestje.Controllers
             
             if(boekingVM.Date < DateTime.Now)
             {
-                Session["nodateselected"] = "Selecteer een datum na de huidige datum om een boeking aan te maken.";
+                Session["nodateselected"] = "Selecteer een valide datum.";
                 return RedirectToAction("Index");
             }
+
             if(Session["nobeestselected"] != null)
-                 ViewBag.Error = Session["nobeestselected"].ToString();  
+                 ViewBag.Error = Session["nobeestselected"].ToString();
+
+            if (Session["wrongcollection"] != null)
+                ViewBag.Error = Session["wrongcollection"].ToString();
 
             var beestjes = boekingRepository.GetBeestjes();
             List<BeestjeVM> beestlijst = new List<BeestjeVM>();
@@ -63,7 +67,15 @@ namespace BeestjeOpJeFeestje.Controllers
             if (boekingVM.SelectedBeestjes.Count == 0)
             {
                 Session["nobeestselected"] = "Selecteer minimaal een beest.";
-                return RedirectToAction("Stap1", new {boekingVM.Date, NoError = false});
+                return RedirectToAction("Stap1", new {boekingVM.Date});
+            }
+
+            string check = CheckIfSelectedBeestjesAreValid(boekingVM);
+
+            if(check != null)
+            {
+                Session["wrongcollection"] = check;
+                return RedirectToAction("Stap1", new { boekingVM.Date});
             }
 
             foreach(Beestje beest in boekingVM.SelectedBeestjes)
@@ -78,37 +90,37 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
+
         public ActionResult Stap3(BoekingVM boekingVM)
         {
-            foreach(int i in boekingVM.BeestjesIds)
-               boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
+                foreach (int i in boekingVM.BeestjesIds)
+                    boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
 
-            foreach (Accessoires a in boekingVM.Accessoires)
-            {
-                if (a.IsSelected)
+                foreach (Accessoires a in boekingVM.Accessoires)
                 {
-                    boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(a.Id));
-                    boekingVM.AccessoiresIds.Add(a.Id);
+                    if (a.IsSelected)
+                    {
+                        boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(a.Id));
+                        boekingVM.AccessoiresIds.Add(a.Id);
+                    }
                 }
-            }
+         
             return View(boekingVM);
         }
 
-        public ActionResult Stap4([Bind(Include = "Date,FirstName,LastName,Adres,Email,BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
+        public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
-            foreach (int i in boekingVM.BeestjesIds)
-                boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
+                foreach (int i in boekingVM.BeestjesIds)
+                    boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
 
-            foreach (int i in boekingVM.AccessoiresIds)
-                boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(i));
+                foreach (int i in boekingVM.AccessoiresIds)
+                    boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(i));
 
-            boekingVM.FullName = boekingVM.FirstName + boekingVM.Prefix + boekingVM.LastName;
-            boekingVM.TotalPrice = CalculateTotalPrice(boekingVM);
+                boekingVM.FullName = boekingVM.FirstName + " " + boekingVM.Prefix + " " + boekingVM.LastName;
+                boekingVM.TotalPrice = CalculateTotalPrice(boekingVM);
 
             return View(boekingVM);
         }
-
-
 
         [HttpPost]
         public ActionResult Finish([Bind(Include = "Date,FirstName,LastName,Adres,Email,BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
@@ -116,7 +128,6 @@ namespace BeestjeOpJeFeestje.Controllers
             boekingRepository.AddBoeking(boekingVM);
             return View();
         }
-
 
         private bool BeestjeHasNoBoeking(Beestje b)
         {
@@ -141,6 +152,43 @@ namespace BeestjeOpJeFeestje.Controllers
                 totalprice += a.Price;
 
             return totalprice;
+        }
+
+        private string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)
+        {
+            bool isFarmAnimal = false;
+            bool isLionorPolar = false;
+            bool isPinguin = false;
+            bool isDesert = false;
+            bool isSnow = false;
+            foreach (Beestje b in boeking.SelectedBeestjes)
+            {
+                if (b.Type == "Boerderij")
+                    isFarmAnimal = true;
+
+                if (b.Name == "Leeuw" || b.Name == "Ijsbeer")
+                    isLionorPolar = true;
+
+                if (b.Name == "Pinguïn")
+                    isPinguin = true;
+
+                if (b.Type == "Woestijn")
+                    isDesert = true;
+
+                if (b.Type == "Sneeuw")
+                    isSnow = true;
+            }
+
+            if (isFarmAnimal && isLionorPolar)
+                return "Je mag geen leeuw of Ijsbeer bij boerderijdieren.";
+
+            DayOfWeek day = boeking.Date.DayOfWeek;
+            if (isPinguin && (day == DayOfWeek.Saturday) || (day == DayOfWeek.Sunday))
+                return "Je mag helaas geen pinguïns reserveren in het weekend.";
+
+
+
+            return null;
         }
     }
 }

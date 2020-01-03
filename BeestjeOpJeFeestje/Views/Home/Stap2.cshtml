@@ -27,20 +27,28 @@
                     {
                         @Html.HiddenFor(model => Model.BeestjesIds[i])
                     }
-                    for (int i = 0; i < Model.Accessoires.Count; i++)
+                    if (Model.Accessoires.Count == 0)
                     {
-                        <div class="col-sm-3 animallist">
-                            <div class="panel-heading animaltekst">
-                                @Html.DisplayFor(model => model.Accessoires[i].Name)
-                                <p />
-                                @Html.CheckBoxFor(model => model.Accessoires[i].IsSelected)
-                            </div>
-                            <div class="panel-footer animaltekst">
-                                @Html.HiddenFor(model => model.Accessoires[i].Id)
-                                @Html.DisplayFor(model => model.Accessoires[i].Price)
-                            </div>
-                        </div>
+                        <p> Er zijn geen accessoires voor de geselecteerde beestjes.</p>
                     }
+                    else
+                    {
+                        for (int i = 0; i < Model.Accessoires.Count; i++)
+                        {
+                            <div class="col-sm-3 animallist">
+                                <div class="panel-heading animaltekst">
+                                    @Html.DisplayFor(model => model.Accessoires[i].Name)
+                                    <p />
+                                    @Html.CheckBoxFor(model => model.Accessoires[i].IsSelected)
+                                </div>
+                                <div class="panel-footer animaltekst">
+                                    @Html.HiddenFor(model => model.Accessoires[i].Id)
+                                    @Html.DisplayFor(model => model.Accessoires[i].Price)
+                                </div>
+                            </div>
+                        }
+                    }
+
                     <div class="form-group">
                         <div class="col-md-12">
                             <input type="submit" name="BtnNext" value="Ga door naar stap 3" class="btn btn-default" />

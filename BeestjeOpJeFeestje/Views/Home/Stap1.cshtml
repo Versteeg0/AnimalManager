@@ -53,8 +53,8 @@
                             <div class="col-sm-3 animallistDisable">
                                 <div class="panel-heading animaltekst">
                                     @Html.DisplayFor(model => model.Beestjes[i].Name)
-                                    <p />
-                                    <p />
+                                    <p/>
+                                    @Html.CheckBoxFor(model => model.Beestjes[i].IsSelected, new { @onclick = "return false" })
                                 </div>
                                 <div class="panel-body" style="border:solid 1px lightgray">
                                     <img src='@Url.Content(Model.Beestjes[i].ImagePath)' height="100" />
