@@ -20,19 +20,22 @@ namespace BeestjeOpJeFeestje.Controllers
         public ActionResult Index()
         {
             var boekingVM = new BoekingVM();
-
+            if (Session["nodateselected"] != null)
+                ViewBag.Error = Session["nodateselected"].ToString();
             return View(boekingVM);
         }
 
         public ActionResult Stap1(BoekingVM boekingVM)
         {
-          
+            
             if(boekingVM.Date < DateTime.Now)
             {
-                ViewBag.Error = "Selecteer een datum om een boeking aan te maken.";
+                Session["nodateselected"] = "Selecteer een datum na de huidige datum om een boeking aan te maken.";
                 return RedirectToAction("Index");
             }
-            
+            if(Session["nobeestselected"] != null)
+                 ViewBag.Error = Session["nobeestselected"].ToString();  
+
             var beestjes = boekingRepository.GetBeestjes();
             List<BeestjeVM> beestlijst = new List<BeestjeVM>();
             
@@ -59,8 +62,8 @@ namespace BeestjeOpJeFeestje.Controllers
 
             if (boekingVM.SelectedBeestjes.Count == 0)
             {
-                ViewBag.Error = "Selecteer minimaal een Accessoire voor je boeking.";
-                return RedirectToAction("Stap1", new { Date = boekingVM.Date });
+                Session["nobeestselected"] = "Selecteer minimaal een beest.";
+                return RedirectToAction("Stap1", new {boekingVM.Date, NoError = false});
             }
 
             foreach(Beestje beest in boekingVM.SelectedBeestjes)
