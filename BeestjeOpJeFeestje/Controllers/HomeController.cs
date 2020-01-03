@@ -24,9 +24,9 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
-        public ActionResult Stap1(BoekingVM model)
+        public ActionResult Stap1(BoekingVM boekingVM)
         {
-            BoekingVM boekingVM = model;
+          
             if(boekingVM.Date < DateTime.Now)
             {
                 ViewBag.Error = "Selecteer een datum om een boeking aan te maken.";
@@ -38,34 +38,34 @@ namespace BeestjeOpJeFeestje.Controllers
             
             foreach(var b in beestjes)
             {
-                beestlijst.Add(new BeestjeVM { Beest = b });
+                if(BeestjeHasNoBoeking(b))
+                boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = false });
+                else
+                 boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = true });
             }
-            boekingVM.Beestjes = beestlijst;
-
             return View(boekingVM);
         }
 
-        public ActionResult Stap2(BoekingVM model)
+        public ActionResult Stap2(BoekingVM boekingVM)
         {
-            BoekingVM boekingVM = model;
             foreach (BeestjeVM b in boekingVM.Beestjes)
             {
-                  if (b.IsSelected && BeestjeHasNoBoeking(b.Beest))
+                  if (b.IsSelected)
                   {
                       boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(b.Id));
+                      boekingVM.BeestjesIds.Add(b.Id);
                   }
             }
 
             if (boekingVM.SelectedBeestjes.Count == 0)
             {
                 ViewBag.Error = "Selecteer minimaal een Accessoire voor je boeking.";
-                return RedirectToAction("Stap1", boekingVM);
+                return RedirectToAction("Stap1", new { Date = boekingVM.Date });
             }
 
-            List<Accessoires> list = boekingRepository.GetAccessoires();
             foreach(Beestje beest in boekingVM.SelectedBeestjes)
             {
-                foreach(Accessoires a in list)
+                foreach(Accessoires a in boekingRepository.GetAccessoires())
                 {
                     if(a.Beest == beest)
                     boekingVM.Accessoires.Add(a);
@@ -77,27 +77,45 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap3(BoekingVM boekingVM)
         {
-            
+            foreach(int i in boekingVM.BeestjesIds)
+               boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
+
+            foreach (Accessoires a in boekingVM.Accessoires)
+            {
+                if (a.IsSelected)
+                {
+                    boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(a.Id));
+                    boekingVM.AccessoiresIds.Add(a.Id);
+                }
+            }
+            return View(boekingVM);
+        }
+
+        public ActionResult Stap4([Bind(Include = "Date,FirstName,LastName,Adres,Email,BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
+        {
+            foreach (int i in boekingVM.BeestjesIds)
+                boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
+
+            foreach (int i in boekingVM.AccessoiresIds)
+                boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(i));
+
+            boekingVM.FullName = boekingVM.FirstName + boekingVM.Prefix + boekingVM.LastName;
+            boekingVM.TotalPrice = CalculateTotalPrice(boekingVM);
 
             return View(boekingVM);
         }
 
-        public ActionResult Stap4(BoekingVM boekingVM)
+
+
+        [HttpPost]
+        public ActionResult Finish([Bind(Include = "Date,FirstName,LastName,Adres,Email,BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
-
-
-            return View(boekingVM);
-        }
-
-        public ActionResult Finish(BoekingVM boekingVM)
-        {
-
-
+            boekingRepository.AddBoeking(boekingVM);
             return View();
         }
 
 
-        public bool BeestjeHasNoBoeking(Beestje b)
+        private bool BeestjeHasNoBoeking(Beestje b)
         {
             foreach(Boeking boeking in boekingRepository.GetAllBoeking())
             {
@@ -107,6 +125,19 @@ namespace BeestjeOpJeFeestje.Controllers
                 }
             }
             return true;
+        }
+
+        private decimal CalculateTotalPrice(BoekingVM boekingVM)
+        {
+            decimal totalprice = 0;
+
+            foreach(Beestje b in boekingVM.SelectedBeestjes)
+                totalprice += b.Price;
+
+            foreach(Accessoires a in boekingVM.SelectedAccessoires)
+                totalprice += a.Price;
+
+            return totalprice;
         }
     }
 }

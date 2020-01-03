@@ -79,22 +79,6 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boeking);
         }
 
-      /*  // POST: Boekings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,FirstName,Prefix,LastName,Email")] Boeking boeking)
-        {
-            if (ModelState.IsValid)
-            {
-                boekingRepository.Entry(boeking).State = EntityState.Modified;
-                boekingRepository.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(boeking);
-        }*/
-
         // GET: Boekings/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -120,13 +104,6 @@ namespace BeestjeOpJeFeestje.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Stap1(DateTime date)
-        {
-            var boeking = new Boeking();
-            boeking.Date = date;
-
-            return View(boeking);
-        }
 
         protected override void Dispose(bool disposing)
         {

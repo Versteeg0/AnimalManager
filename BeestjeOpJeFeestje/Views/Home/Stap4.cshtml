@@ -22,12 +22,49 @@
             <div class="stepboxcontent">
                 @using (Html.BeginForm("Finish", "Home"))
                 {
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="BtnNext" value="Ga door naar stap 4" class="btn btn-default" />
-                        </div>
-                    </div>
-                }
+                    @Html.HiddenFor(model => model.Date)
+                    for (int i = 0; i < Model.BeestjesIds.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.BeestjesIds[i])
+                    }
+                    for (int i = 0; i < Model.AccessoiresIds.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.AccessoiresIds[i])
+                    }
+                    @Html.HiddenFor(model => Model.FirstName)
+                    @Html.HiddenFor(model => Model.Prefix)
+                    @Html.HiddenFor(model => Model.LastName)
+                    @Html.HiddenFor(model => model.Adres)
+                    @Html.HiddenFor(model => model.Email)
+            <div>
+                <h2>Contact gegevens:</h2>
+                <p>@Html.DisplayFor(model => model.FullName)</p>
+                <p>@Html.DisplayFor(model => model.Adres)</p>
+                <p>@Html.DisplayFor(model => model.Email)</p>
+            </div>
+
+            <div>
+                <h3>Prijs/Korting</h3>
+                <ul>
+                    @foreach (var b in Model.SelectedBeestjes)
+                    {
+                        <li>@b.Name: @b.Price</li>
+                    }
+                    @foreach (var a in Model.SelectedAccessoires)
+                    {
+                        <li>@a.Name: @a.Price</li>
+                    }
+                </ul>
+                <hr />
+                <h4>Totaal: @Html.DisplayFor(model => model.TotalPrice)</h4>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" name="BtnNext" value="Boeken" class="btn btn-default" />
+                </div>
+            </div>
+        }
             </div>
         </div>
         <div class="col-lg-3 right" style="border:solid 2px lightgray">
@@ -38,10 +75,23 @@
                 <p>Datum: @Model.Date.ToString("dd/MM/yyyy")</p>
                 <hr />
                 <p>Beestjes:</p>
-                <p>Geen beestjes geselecteerd</p>
+                @foreach (var b in Model.SelectedBeestjes)
+                {
+                    <img src='@Url.Content(b.ImagePath)' height="40" />
+                }
                 <hr />
                 <p>Accessoires:</p>
-                <p>Geen accessoires geselecteerd</p>
+                @if (Model.SelectedAccessoires.Count == 0)
+                {
+                    <p>Geen accessoires geselecteerd</p>
+                }
+                else
+                {
+                    foreach (var a in Model.SelectedAccessoires)
+                    {
+                        <p>@a.Name</p>
+                    }
+                }
             </div>
 
         </div>

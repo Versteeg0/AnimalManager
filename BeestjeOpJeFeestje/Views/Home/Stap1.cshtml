@@ -24,26 +24,52 @@
             <div class="stepbox col-sm-12" style="background-color: lightgray">
                 <p>Stap 1 - Selecteer de gewenste beestjes</p>
             </div>
+         
             <div class="stepboxcontent">
                 @using (Html.BeginForm("Stap2", "Home"))
                 {
+                    if (ViewBag.Error != null)
+                    {
+                        <p style="color:red">@ViewBag.Error</p>
+                    }
                     @Html.HiddenFor(model => model.Date)
                     for (int i = 0; i < Model.Beestjes.Count; i++)
                     {
-                        <div class="col-sm-3 animallist">
-                            <div class="panel-heading animaltekst">
-                                @Html.DisplayFor(model => model.Beestjes[i].Name)
-                                <p />
-                                @Html.CheckBoxFor(model => model.Beestjes[i].IsSelected)
+                        if (Model.Beestjes[i].HasBoeking == false)
+                        {
+                            <div class="col-sm-3 animallist">
+                                <div class="panel-heading animaltekst">
+                                    @Html.DisplayFor(model => model.Beestjes[i].Name)
+                                    <p />
+                                    @Html.CheckBoxFor(model => model.Beestjes[i].IsSelected)
+                                </div>
+                                <div class="panel-body" style="border:solid 1px lightgray">
+                                    <img src='@Url.Content(Model.Beestjes[i].ImagePath)' height="100" />
+                                </div>
+                                <div class="panel-footer animaltekst">
+                                    @Html.HiddenFor(model => model.Beestjes[i].Id)
+                                    @Html.DisplayFor(model => model.Beestjes[i].Price)
+                                </div>
                             </div>
-                            <div class="panel-body" style="border:solid 1px lightgray">
-                                <img src='@Url.Content(Model.Beestjes[i].ImagePath)' height="100" />
+                        }
+                        else
+                        {
+                            <div class="col-sm-3 animallistDisable">
+                                <div class="panel-heading animaltekst">
+                                    @Html.DisplayFor(model => model.Beestjes[i].Name)
+                                    <p />
+                                    <p />
+                                </div>
+                                <div class="panel-body" style="border:solid 1px lightgray">
+                                    <img src='@Url.Content(Model.Beestjes[i].ImagePath)' height="100" />
+                                </div>
+                                <div class="panel-footer animaltekst">
+                                    @Html.HiddenFor(model => model.Beestjes[i].Id)
+                                    @Html.DisplayFor(model => model.Beestjes[i].Price)
+                                </div>
                             </div>
-                            <div class="panel-footer animaltekst">
-                                @Html.HiddenFor(model => model.Beestjes[i].Id)
-                                @Html.DisplayFor(model => model.Beestjes[i].Price)
-                            </div>
-                        </div>
+                        }
+
 
                     }
                     <div class="form-group">

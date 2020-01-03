@@ -21,14 +21,68 @@
                 <p>Stap 3 - Voer hier uw gegevens in</p>
             </div>
             <div class="stepboxcontent">
+
                 @using (Html.BeginForm("Stap4", "Home"))
                 {
+                    <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.Date)
+                    @for (int i = 0; i < Model.BeestjesIds.Count; i++)
+                    {
+                    @Html.HiddenFor(model => Model.BeestjesIds[i])
+                    }
+                    @for (int i = 0; i < Model.AccessoiresIds.Count; i++)
+                    {
+                    @Html.HiddenFor(model => Model.AccessoiresIds[i])
+                    }
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Prefix, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Prefix, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Prefix, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Adres, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    </div>
+                    <p />
+                    <div class="form-group">
+                        <div class="col-md-12">
                             <input type="submit" name="BtnNext" value="Ga door naar stap 4" class="btn btn-default" />
                         </div>
                     </div>
-                }
+                 }
             </div>
         </div>
         <div class="col-lg-3 right" style="border:solid 2px lightgray">
@@ -39,10 +93,24 @@
                 <p>Datum: @Model.Date.ToString("dd/MM/yyyy")</p>
                 <hr />
                 <p>Beestjes:</p>
-                <p>Geen beestjes geselecteerd</p>
+                @foreach (var b in Model.SelectedBeestjes)
+                {
+                    <img src='@Url.Content(b.ImagePath)' height="40" />
+                }
                 <hr />
                 <p>Accessoires:</p>
-                <p>Geen accessoires geselecteerd</p>
+                @if (Model.SelectedAccessoires.Count == 0)
+                {
+                    <p>Geen accessoires geselecteerd</p>
+                }
+                else
+                {
+                    foreach (var a in Model.SelectedAccessoires)
+                    {
+                        <p>@a.Name</p>
+                    }
+                }
+
             </div>
 
         </div>

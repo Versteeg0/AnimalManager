@@ -101,3 +101,20 @@
     text-align: center;
 }
 
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.animallistDisable {
+    border: solid 2px lightgray;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-bottom: 3px;
+    align-items: center;
+    background-color: darkgray;
+}
+

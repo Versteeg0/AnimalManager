@@ -12,13 +12,13 @@ namespace BeestjeOpJeFeestje.ViewModels
         public Boeking BoekingModel { get; set; } = new Boeking();
         public List<Accessoires> Accessoires { get; set; } = new List<Accessoires>();
         public List<BeestjeVM> Beestjes { get; set; } = new List<BeestjeVM>();
-
+        public List<int> BeestjesIds { get; set; } = new List<int>();
+        public List<int> AccessoiresIds { get; set; } = new List<int>();
         public List<Beestje> SelectedBeestjes { get; set; } = new List<Beestje>();
         public List<Accessoires> SelectedAccessoires { get; set; } = new List<Accessoires>();
 
         [Required]
         [Display(Name = "Datum")]
-     //   [DataType(DataType.Date)]
         public DateTime Date { get { return BoekingModel.Date; } set { BoekingModel.Date = value; } }
 
         [Required(ErrorMessage = "Voornaam is verplicht")]
@@ -35,5 +35,13 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Required(ErrorMessage = "Email is verplicht")]
         [EmailAddress(ErrorMessage = "Dit is geen geldig email adres")]
         public string Email { get { return BoekingModel.Email; } set { BoekingModel.Email = value; } }
+
+        [Required(ErrorMessage = "Adres is verplicht")]
+        public string Adres { get { return BoekingModel.Adres; } set { BoekingModel.Adres = value; } }
+
+        public string FullName { get; set; }
+
+        [DisplayFormat(DataFormatString = "€ {0:n}")]
+        public decimal TotalPrice { get; set; }
     }
 }

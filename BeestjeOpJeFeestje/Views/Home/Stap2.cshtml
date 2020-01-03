@@ -23,6 +23,10 @@
                 @using (Html.BeginForm("Stap3", "Home"))
                 {
                     @Html.HiddenFor(model => model.Date)
+                    for (int i = 0; i < Model.SelectedBeestjes.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.BeestjesIds[i])
+                    }
                     for (int i = 0; i < Model.Accessoires.Count; i++)
                     {
                         <div class="col-sm-3 animallist">
@@ -38,7 +42,7 @@
                         </div>
                     }
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-12">
                             <input type="submit" name="BtnNext" value="Ga door naar stap 3" class="btn btn-default" />
                         </div>
                     </div>
