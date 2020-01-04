@@ -21,13 +21,15 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             var boekingVM = new BoekingVM();
             if (Session["nodateselected"] != null)
+            {
                 ViewBag.Error = Session["nodateselected"].ToString();
+                Session.Clear();
+            }
             return View(boekingVM);
         }
 
         public ActionResult Stap1(BoekingVM boekingVM)
         {
-            
             if(boekingVM.Date < DateTime.Now)
             {
                 Session["nodateselected"] = "Selecteer een valide datum.";
@@ -35,10 +37,17 @@ namespace BeestjeOpJeFeestje.Controllers
             }
 
             if(Session["nobeestselected"] != null)
-                 ViewBag.Error = Session["nobeestselected"].ToString();
+            {
+                ViewBag.Error = Session["nobeestselected"].ToString();
+                Session.Clear();
+            }
 
             if (Session["wrongcollection"] != null)
+            {
                 ViewBag.Error = Session["wrongcollection"].ToString();
+                Session.Clear();
+            }
+            
 
             var beestjes = boekingRepository.GetBeestjes();
             List<BeestjeVM> beestlijst = new List<BeestjeVM>();
@@ -183,10 +192,14 @@ namespace BeestjeOpJeFeestje.Controllers
                 return "Je mag geen leeuw of Ijsbeer bij boerderijdieren.";
 
             DayOfWeek day = boeking.Date.DayOfWeek;
-            if (isPinguin && (day == DayOfWeek.Saturday) || (day == DayOfWeek.Sunday))
+            if (isPinguin && ((day == DayOfWeek.Saturday) || (day == DayOfWeek.Sunday)))
                 return "Je mag helaas geen pinguïns reserveren in het weekend.";
 
-
+            if (isDesert && (boeking.Date.Month > 9 || boeking.Date.Month < 3))
+                return "Je mag helaas geen woestijn dieren reserveren in de maanden oktober t/m februari.";   
+            
+            if (isSnow && (boeking.Date.Month > 5 && boeking.Date.Month < 9))
+                return "Je mag helaas geen sneeuw dieren reserveren in de maanden juni t/m augustus.";
 
             return null;
         }

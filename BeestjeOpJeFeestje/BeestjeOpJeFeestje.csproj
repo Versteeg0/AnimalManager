@@ -219,6 +219,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Resources\aap.png" />
     <Content Include="Resources\bever.png" />
+    <Content Include="Resources\checkmark2.png" />
     <Content Include="Resources\doggo.png" />
     <Content Include="Resources\donkey.png" />
     <Content Include="Resources\duck.png" />
