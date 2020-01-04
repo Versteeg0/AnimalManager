@@ -39,6 +39,12 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Required(ErrorMessage = "Adres is verplicht")]
         public string Adres { get { return BoekingModel.Adres; } set { BoekingModel.Adres = value; } }
 
+        [Required(ErrorMessage = "Nummer is verplicht")]
+        [Display(Name = "Telefoonnummer")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string Number { get { return BoekingModel.Number; } set { BoekingModel.Number = value; } }
+
         public string FullName { get; set; }
 
         [DisplayFormat(DataFormatString = "€ {0:n}")]

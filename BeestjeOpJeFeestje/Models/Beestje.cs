@@ -28,5 +28,7 @@ namespace BeestjeOpJeFeestje.Models
 
         public ICollection<Accessoires> AccessoireList { get; set; }
 
+        public ICollection<Boeking> BoekingList { get; set; }
+
     }
 }

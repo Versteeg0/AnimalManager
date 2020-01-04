@@ -23,6 +23,8 @@ namespace BeestjeOpJeFeestje.Models
 
         public string Adres { get; set; }
 
+        public string Number { get; set; }
+
         public ICollection<Beestje> Beestjes { get; set; } = new List<Beestje>();
 
         public ICollection<Accessoires> Accessoires { get; set; }

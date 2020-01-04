@@ -54,7 +54,7 @@ namespace BeestjeOpJeFeestje.Controllers
             
             foreach(var b in beestjes)
             {
-                if(BeestjeHasNoBoeking(b))
+                if(BeestjeHasNoBoeking(b, boekingVM))
                 boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = false });
                 else
                  boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = true });
@@ -117,7 +117,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
-        public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
+        public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
                 foreach (int i in boekingVM.BeestjesIds)
                     boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
@@ -132,17 +132,17 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
         [HttpPost]
-        public ActionResult Finish([Bind(Include = "Date,FirstName,LastName,Adres,Email,BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
+        public ActionResult Finish([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
             boekingRepository.AddBoeking(boekingVM);
             return View();
         }
 
-        private bool BeestjeHasNoBoeking(Beestje b)
+        private bool BeestjeHasNoBoeking(Beestje b, BoekingVM currentBoeking)
         {
             foreach(Boeking boeking in boekingRepository.GetAllBoeking())
             {
-                if (boeking.Beestjes != null && boeking.Beestjes.FirstOrDefault(beest => beest.Id == b.Id) != null)
+                if (boeking.Beestjes != null && boeking.Beestjes.FirstOrDefault(beest => beest.Id == b.Id) != null && boeking.Date == currentBoeking.Date)
                 {
                     return false;
                 }
