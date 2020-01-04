@@ -24,7 +24,10 @@ namespace BeestjeOpJeFeestje.Controllers
         // GET: Boekings
         public ActionResult Index()
         {
-            return View(boekingRepository.GetAllBoeking());
+            List<BoekingVM> boekingList = new List<BoekingVM>();
+            foreach (Boeking b in boekingRepository.GetAllBoeking())
+                boekingList.Add(new BoekingVM { BoekingModel = b });
+            return View(boekingList);
         }
 
         // GET: Boekings/Details/5
@@ -39,7 +42,11 @@ namespace BeestjeOpJeFeestje.Controllers
             {
                 return HttpNotFound();
             }
-            return View(boeking);
+            BoekingVM boekingVM = new BoekingVM();
+            boekingVM.BoekingModel = boeking;
+            boekingVM.FullName = boekingVM.FirstName + " " + boekingVM.Prefix + " " + boekingVM.LastName;
+            
+            return View(boekingVM);
         }
 
         // GET: Boekings/Create
@@ -113,7 +120,5 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             base.Dispose(disposing);
         }
-
-
     }
 }

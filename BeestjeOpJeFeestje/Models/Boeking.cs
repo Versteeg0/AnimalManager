@@ -25,6 +25,8 @@ namespace BeestjeOpJeFeestje.Models
 
         public string Number { get; set; }
 
+        public decimal Price { get; set; }
+
         public ICollection<Beestje> Beestjes { get; set; } = new List<Beestje>();
 
         public ICollection<Accessoires> Accessoires { get; set; }

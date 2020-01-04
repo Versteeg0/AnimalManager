@@ -132,7 +132,7 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
         [HttpPost]
-        public ActionResult Finish([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
+        public ActionResult Finish([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, TotalPrice, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
             boekingRepository.AddBoeking(boekingVM);
             return View();

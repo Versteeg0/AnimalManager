@@ -19,6 +19,8 @@ namespace BeestjeOpJeFeestje.Models
 
         public Beestje Beest { get; set; }
 
+        public List<Boeking>  BoekingLijst { get; set; }
+
         public bool IsSelected { get; set; }
     }
 }

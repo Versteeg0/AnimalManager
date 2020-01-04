@@ -48,6 +48,6 @@ namespace BeestjeOpJeFeestje.ViewModels
         public string FullName { get; set; }
 
         [DisplayFormat(DataFormatString = "€ {0:n}")]
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get { return BoekingModel.Price; } set { BoekingModel.Price = value; } }
     }
 }
