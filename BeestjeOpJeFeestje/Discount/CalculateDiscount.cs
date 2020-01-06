@@ -19,34 +19,9 @@ namespace BeestjeOpJeFeestje.Discount
             List<string> kortinglijst = new List<string>();
             int discountAmount = 0;
 
-            int counterWoestijnType = 0;
-            int counterSneeuwType = 0;
-            int counterBoerderijType = 0;
-            int counterJungleType = 0;
-
             foreach (Beestje b in boekingVM.SelectedBeestjes)
             {
                 decimal beestprice = b.Price;
-
-                if (boekingVM.SelectedBeestjes.Count > 2)
-                {
-                    if (b.Type == "Woestijn")
-                    {
-                        counterWoestijnType++;
-                    }
-                    else if (b.Type == "Sneeuw")
-                    {
-                        counterSneeuwType++;
-                    }
-                    else if (b.Type == "Boerderij")
-                    {
-                        counterBoerderijType++;
-                    }
-                    else
-                    {
-                        counterJungleType++;
-                    }
-                }
 
                 if (b.Name == "Eend")
                 {
@@ -68,15 +43,34 @@ namespace BeestjeOpJeFeestje.Discount
                     discountAmount += 15;
                 }
 
-                    totalPrice = b.Price;
+                for (char c = 'a'; c <= 'z'; c++)
+                {
+                    if (b.Name.ToLower().Contains(c))
+                    {
+                        DiscountList.Add("Bevat letter " + c + " 2%");
+                        discountAmount += 2;
+                    }
+                    else
+                        break;
+                }
+
+                totalPrice += b.Price;
             }
 
-            if(counterBoerderijType > 2 || counterJungleType > 2 || counterSneeuwType > 2 || counterWoestijnType > 2)
+            if (boekingVM.SelectedBeestjes.Count > 2)
             {
-                DiscountList.Add("3 Types: 10%");
-                discountAmount += 10;
+                int counterWoestijnType = boekingVM.SelectedBeestjes.FindAll(b => b.Type == "Woestijn").Count();
+                int counterSneeuwType = boekingVM.SelectedBeestjes.FindAll(b => b.Type == "Sneeuw").Count();
+                int counterBoerderijType = boekingVM.SelectedBeestjes.FindAll(b => b.Type == "Boerderij").Count();
+                int counterJungleType = boekingVM.SelectedBeestjes.FindAll(b => b.Type == "Jungle").Count();
+
+                if (counterBoerderijType > 2 || counterJungleType > 2 || counterSneeuwType > 2 || counterWoestijnType > 2)
+                {
+                    DiscountList.Add("3 Types: 10%");
+                    discountAmount += 10;
+                }
             }
-            
+
 
             foreach (Accessoires a in boekingVM.SelectedAccessoires)
                 totalPrice += a.Price;
