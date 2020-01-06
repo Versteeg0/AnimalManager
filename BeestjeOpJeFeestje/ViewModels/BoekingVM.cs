@@ -45,9 +45,11 @@ namespace BeestjeOpJeFeestje.ViewModels
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string Number { get { return BoekingModel.Number; } set { BoekingModel.Number = value; } }
 
-        public string FullName { get; set; }
-
         [DisplayFormat(DataFormatString = "€ {0:n}")]
         public decimal TotalPrice { get { return BoekingModel.Price; } set { BoekingModel.Price = value; } }
+
+        public string FullName { get; set; }
+
+        public List<String> DiscountList { get; set; }
     }
 }

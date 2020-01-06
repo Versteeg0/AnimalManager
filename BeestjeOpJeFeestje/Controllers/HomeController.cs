@@ -1,4 +1,5 @@
-﻿using BeestjeOpJeFeestje.Models;
+﻿using BeestjeOpJeFeestje.Discount;
+using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
 using BeestjeOpJeFeestje.ViewModels;
 using System;
@@ -12,6 +13,7 @@ namespace BeestjeOpJeFeestje.Controllers
     public class HomeController : Controller
     {
         private readonly IBoekingRepository boekingRepository;
+        private CalculateDiscount calculateDiscount;
 
         public HomeController(IBoekingRepository repo)
         {
@@ -119,14 +121,16 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
+                calculateDiscount = new CalculateDiscount();
                 foreach (int i in boekingVM.BeestjesIds)
                     boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
 
                 foreach (int i in boekingVM.AccessoiresIds)
                     boekingVM.SelectedAccessoires.Add(boekingRepository.GetAccessoireById(i));
 
-                boekingVM.FullName = boekingVM.FirstName + " " + boekingVM.Prefix + " " + boekingVM.LastName;
-                boekingVM.TotalPrice = CalculateTotalPrice(boekingVM);
+            boekingVM.FullName = boekingVM.FirstName + " " + boekingVM.Prefix + " " + boekingVM.LastName;
+            boekingVM.TotalPrice = calculateDiscount.CalculateTotalPrice(boekingVM);
+            boekingVM.DiscountList = calculateDiscount.DiscountList;
 
             return View(boekingVM);
         }
@@ -148,36 +152,6 @@ namespace BeestjeOpJeFeestje.Controllers
                 }
             }
             return true;
-        }
-
-        private decimal CalculateTotalPrice(BoekingVM boekingVM)
-        {
-            decimal totalprice = 0;
-            List<string> kortinglijst = new List<string>();
-
-            foreach (Beestje b in boekingVM.SelectedBeestjes)
-            {
-                if (b.Name == "Eend")
-                {
-                    Random r = new Random();
-                    int korting = r.Next(0, 7);
-
-                    if (korting == 1)
-                    {
-                        totalprice = b.Price / 2;
-                        kortinglijst.Add("Eend 50%");
-                    }
-
-                }
-                DayOfWeek day = boekingVM.Date.DayOfWeek;
-                if (day == DayOfWeek.Monday || day == DayOfWeek.Tuesday)
-                    totalprice = b.Price - ((b.Price / 100) * 15);
-            }
-
-            foreach (Accessoires a in boekingVM.SelectedAccessoires)
-                totalprice += a.Price;
-
-            return totalprice;
         }
 
         private string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)

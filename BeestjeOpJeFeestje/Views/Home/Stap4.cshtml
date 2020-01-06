@@ -56,6 +56,10 @@
                     {
                         <li>@a.Name: @a.Price</li>
                     }
+                    @foreach(var d in Model.DiscountList)
+                    {
+                        <li>@d</li>
+                    }
                 </ul>
                 <hr />
                 <h4>Totaal: @Html.DisplayFor(model => model.TotalPrice)</h4>
