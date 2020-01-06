@@ -18,10 +18,36 @@ namespace BeestjeOpJeFeestje.Discount
             decimal totalPrice = 0;
             List<string> kortinglijst = new List<string>();
             int discountAmount = 0;
+
+            int counterWoestijnType = 0;
+            int counterSneeuwType = 0;
+            int counterBoerderijType = 0;
+            int counterJungleType = 0;
+
             foreach (Beestje b in boekingVM.SelectedBeestjes)
             {
                 decimal beestprice = b.Price;
-                
+
+                if (boekingVM.SelectedBeestjes.Count > 2)
+                {
+                    if (b.Type == "Woestijn")
+                    {
+                        counterWoestijnType++;
+                    }
+                    else if (b.Type == "Sneeuw")
+                    {
+                        counterSneeuwType++;
+                    }
+                    else if (b.Type == "Boerderij")
+                    {
+                        counterBoerderijType++;
+                    }
+                    else
+                    {
+                        counterJungleType++;
+                    }
+                }
+
                 if (b.Name == "Eend")
                 {
                     Random r = new Random();
@@ -42,10 +68,15 @@ namespace BeestjeOpJeFeestje.Discount
                     discountAmount += 15;
                 }
 
-
-
                     totalPrice = b.Price;
             }
+
+            if(counterBoerderijType > 2 || counterJungleType > 2 || counterSneeuwType > 2 || counterWoestijnType > 2)
+            {
+                DiscountList.Add("3 Types: 10%");
+                discountAmount += 10;
+            }
+            
 
             foreach (Accessoires a in boekingVM.SelectedAccessoires)
                 totalPrice += a.Price;
