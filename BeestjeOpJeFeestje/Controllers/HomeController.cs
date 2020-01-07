@@ -28,7 +28,6 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             return View();
         }
-
         public ActionResult Stap1(BoekingVM boekingVM)
         {
             if(boekingVM.Date < DateTime.Now)
@@ -151,7 +150,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return true;
         }
 
-        private string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)
+        public string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)
         {
             bool isFarmAnimal = false;
             bool isLionorPolar = false;
