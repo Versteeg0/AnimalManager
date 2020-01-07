@@ -18,6 +18,7 @@ namespace BeestjeOpJeFeestje.Discount
             decimal totalPrice = 0;
             List<string> kortinglijst = new List<string>();
             int discountAmount = 0;
+            bool hasDogOrCat = false;
 
             foreach (Beestje b in boekingVM.SelectedBeestjes)
             {
@@ -52,6 +53,16 @@ namespace BeestjeOpJeFeestje.Discount
                     }
                     else
                         break;
+                }
+
+                if(b.Name.Equals("Hond") || b.Name.Equals("Kat"))
+                {
+                    if (hasDogOrCat)
+                    {
+                        discountAmount += 10;
+                        DiscountList.Add("2x hond of kat 25%");
+                    }
+                    else hasDogOrCat = true;
                 }
 
                 totalPrice += b.Price;
