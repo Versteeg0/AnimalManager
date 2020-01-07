@@ -71,7 +71,6 @@ namespace BeestjeOpJeFeestje.Discount
                 }
             }
 
-
             foreach (Accessoires a in boekingVM.SelectedAccessoires)
                 totalPrice += a.Price;
 
