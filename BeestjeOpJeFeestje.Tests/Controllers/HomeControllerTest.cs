@@ -6,17 +6,20 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BeestjeOpJeFeestje;
 using BeestjeOpJeFeestje.Controllers;
+using BeestjeOpJeFeestje.Repos;
+using Moq;
 
 namespace BeestjeOpJeFeestje.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
-       /* [TestMethod]
+        [TestMethod]
         public void Index()
         {
+            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(repo.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -24,31 +27,5 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }*/
     }
 }

@@ -19,35 +19,32 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             boekingRepository = repo;
         }
+        [HttpGet]
         public ActionResult Index()
         {
-            var boekingVM = new BoekingVM();
-            if (Session["nodateselected"] != null)
+            if (TempData["nodateselected"] != null)
             {
-                ViewBag.Error = Session["nodateselected"].ToString();
-                Session.Clear();
+                ViewBag.Error = TempData["nodateselected"].ToString();
             }
-            return View(boekingVM);
+            return View();
         }
 
         public ActionResult Stap1(BoekingVM boekingVM)
         {
             if(boekingVM.Date < DateTime.Now)
             {
-                Session["nodateselected"] = "Selecteer een valide datum.";
+                TempData["nodateselected"] = "Selecteer een valide datum.";
                 return RedirectToAction("Index");
             }
 
-            if(Session["nobeestselected"] != null)
+            if(TempData["nobeestselected"] != null)
             {
-                ViewBag.Error = Session["nobeestselected"].ToString();
-                Session.Clear();
+                ViewBag.Error = TempData["nobeestselected"].ToString();
             }
 
-            if (Session["wrongcollection"] != null)
+            if (TempData["wrongcollection"] != null)
             {
-                ViewBag.Error = Session["wrongcollection"].ToString();
-                Session.Clear();
+                ViewBag.Error = TempData["wrongcollection"].ToString();
             }
             
 
@@ -77,7 +74,7 @@ namespace BeestjeOpJeFeestje.Controllers
 
             if (boekingVM.SelectedBeestjes.Count == 0)
             {
-                Session["nobeestselected"] = "Selecteer minimaal een beest.";
+                TempData["nobeestselected"] = "Selecteer minimaal een beest.";
                 return RedirectToAction("Stap1", new {boekingVM.Date});
             }
 
@@ -85,7 +82,7 @@ namespace BeestjeOpJeFeestje.Controllers
 
             if(check != null)
             {
-                Session["wrongcollection"] = check;
+                TempData["wrongcollection"] = check;
                 return RedirectToAction("Stap1", new { boekingVM.Date});
             }
 
