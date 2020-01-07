@@ -12,7 +12,7 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
     public class ValidationTest
     {
         [TestMethod]
-        public void IjsbeerofLeeuwBoerderij()
+        public void PolarBearOrLionOnFarm()
         {
             // Arrange
             Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
@@ -56,5 +56,46 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             // Assert
             Assert.AreEqual("Je mag helaas geen pinguïns reserveren in het weekend.", result);
         }
+
+        [TestMethod]
+        public void DesertInWinter()
+        {
+            // Arrange
+            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
+            Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
+            Mock<Beestje> kameel = new Mock<Beestje>();
+            boekingVM.Object.Date = new DateTime(2020, 1, 5);
+            kameel.Object.Type = "Woestijn";
+            boekingVM.Object.SelectedBeestjes.Add(kameel.Object);
+
+            HomeController controller = new HomeController(repo.Object);
+
+            // Act
+            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+
+            // Assert
+            Assert.AreEqual("Je mag helaas geen woestijn dieren reserveren in de maanden oktober t/m februari.", result);
+        }
+
+        [TestMethod]
+        public void SnowInSummer()
+        {
+            // Arrange
+            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
+            Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
+            Mock<Beestje> kameel = new Mock<Beestje>();
+            boekingVM.Object.Date = new DateTime(2020, 7, 5);
+            kameel.Object.Type = "Sneeuw";
+            boekingVM.Object.SelectedBeestjes.Add(kameel.Object);
+
+            HomeController controller = new HomeController(repo.Object);
+
+            // Act
+            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+
+            // Assert
+            Assert.AreEqual("Je mag helaas geen sneeuw dieren reserveren in de maanden juni t/m augustus.", result);
+        }
+
     }
 }
