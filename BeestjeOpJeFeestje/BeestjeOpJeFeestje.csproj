@@ -180,22 +180,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccessoiresController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeestjesController.cs" />
     <Compile Include="Controllers\BoekingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Discount\CalculateDiscount.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Accessoires.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Beestje.cs" />
     <Compile Include="Models\Boeking.cs" />
     <Compile Include="Models\ContextInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\AccessoiresRepository.cs" />
     <Compile Include="Repos\BeestjesRepository.cs" />
