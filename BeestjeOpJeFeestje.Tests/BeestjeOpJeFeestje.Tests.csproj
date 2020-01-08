@@ -101,10 +101,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Accessoire\AccessoiresControllerTest.cs" />
+    <Compile Include="Controllers\Accessoire\AccessoiresRepositoryTest.cs" />
+    <Compile Include="Controllers\Accessoire\AccessoireVMTest.cs" />
+    <Compile Include="Controllers\Beestjes\BeestjesControllerTest.cs" />
+    <Compile Include="Controllers\Beestjes\BeestjesRepositoryTest.cs" />
+    <Compile Include="Controllers\Beestjes\BeestjeVMTest.cs" />
+    <Compile Include="Controllers\Boeking\BoekingControllerTest.cs" />
+    <Compile Include="Controllers\Boeking\BoekingRepositoryTest.cs" />
+    <Compile Include="Controllers\Boeking\BoekingVMTest.cs" />
     <Compile Include="Controllers\DiscountTest.cs" />
     <Compile Include="Controllers\ValidationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Controllers\Boeking\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -118,6 +127,7 @@
       <Name>BeestjeOpJeFeestje</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

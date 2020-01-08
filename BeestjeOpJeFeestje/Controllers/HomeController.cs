@@ -19,6 +19,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             boekingRepository = repo;
         }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -28,12 +29,13 @@ namespace BeestjeOpJeFeestje.Controllers
             }
             return View();
         }
+
         public ActionResult Stap1(BoekingVM boekingVM)
         {
             if(boekingVM.Date < DateTime.Now)
             {
                 TempData["nodateselected"] = "Selecteer een valide datum.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             if(TempData["nobeestselected"] != null)
@@ -93,10 +95,8 @@ namespace BeestjeOpJeFeestje.Controllers
                     boekingVM.Accessoires.Add(a);
                 }
             }
-
             return View(boekingVM);
         }
-
 
         public ActionResult Stap3(BoekingVM boekingVM)
         {

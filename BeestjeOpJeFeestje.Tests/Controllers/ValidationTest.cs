@@ -5,17 +5,43 @@ using BeestjeOpJeFeestje.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Web.Mvc;
 
 namespace BeestjeOpJeFeestje.Tests.Controllers
 {
     [TestClass]
     public class ValidationTest
     {
+        private Mock<IBoekingRepository> repo;
+
+        [TestInitialize]
+        public void Init()
+        {
+            repo = new Mock<IBoekingRepository>();
+        }
+
+        [TestMethod]
+        public void Stap1HasNoDate()
+        {
+            // Arrange
+            HomeController controller = new HomeController(repo.Object);
+            Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Stap1(boekingVM.Object);
+
+            result.RouteValues["action"].Equals("Index");
+            result.RouteValues["controller"].Equals("Home");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Home", result.RouteValues["controller"]);
+        }
+
         [TestMethod]
         public void PolarBearOrLionOnFarm()
         {
             // Arrange
-            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
             Mock<Beestje> ijsbeer = new Mock<Beestje>();
             Mock<Beestje> eend = new Mock<Beestje>();
@@ -40,7 +66,6 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
         public void PinguinInWeekend()
         {
             // Arrange
-            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
             Mock<Beestje> pinguin = new Mock<Beestje>();
 
@@ -61,7 +86,6 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
         public void DesertInWinter()
         {
             // Arrange
-            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
             Mock<Beestje> kameel = new Mock<Beestje>();
             boekingVM.Object.Date = new DateTime(2020, 1, 5);
@@ -81,7 +105,6 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
         public void SnowInSummer()
         {
             // Arrange
-            Mock<IBoekingRepository> repo = new Mock<IBoekingRepository>();
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
             Mock<Beestje> kameel = new Mock<Beestje>();
             boekingVM.Object.Date = new DateTime(2020, 7, 5);

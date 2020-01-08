@@ -20,7 +20,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             beestjesRepository = repo;
         }
-        // GET: Beestjes
+        [HttpGet]
         public ActionResult Index()
         {
             List<BeestjeVM> beestList = new List<BeestjeVM>();
@@ -67,7 +67,7 @@ namespace BeestjeOpJeFeestje.Controllers
                     return View();
                 }
                 beestjesRepository.AddBeestje(beestje);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Beestjes");
             }
             return View(beestje);
         }
@@ -132,7 +132,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             Beestje beestje = beestjesRepository.GetBeestjeById(id);
             beestjesRepository.DeleteBeestje(beestje);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Beestjes");
         }
 
         protected override void Dispose(bool disposing)

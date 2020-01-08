@@ -65,7 +65,7 @@ namespace BeestjeOpJeFeestje.Controllers
             if (ModelState.IsValid)
             {
                 accessoiresRepository.CreateAccessoire(accessoires);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Accessoires");
             }
 
             return View(accessoires);
