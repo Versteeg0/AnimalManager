@@ -69,12 +69,12 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
             Assert.AreEqual("Accessoires", result.RouteValues["controller"]);
         }
 
-       /* [TestMethod]
+        [TestMethod]
         public void Edit()
         {
             // Arrange
-            repo.Setup(x => x.GetBeestjeById(1)).Returns(new Beestje());
-            BeestjesController controller = new BeestjesController(repo.Object);
+            repo.Setup(x => x.GetAccessoireById(1)).Returns(new Accessoires());
+            AccessoiresController controller = new AccessoiresController(repo.Object);
 
             // Act
             ViewResult result = controller.Edit(1) as ViewResult;
@@ -84,25 +84,11 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
         }
 
         [TestMethod]
-        public void EditBeestWrongType()
-        {
-            // Arrange
-            BeestjesController controller = new BeestjesController(repo.Object);
-            Mock<BeestjeVM> beestjeVM = new Mock<BeestjeVM>();
-            beestjeVM.Object.Type = "Test";
-            // Act
-            var result = controller.Create(beestjeVM.Object) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
         public void Delete()
         {
             // Arrange
-            repo.Setup(x => x.GetBeestjeById(1)).Returns(new Beestje());
-            BeestjesController controller = new BeestjesController(repo.Object);
+            repo.Setup(x => x.GetAccessoireById(1)).Returns(new Accessoires());
+            AccessoiresController controller = new AccessoiresController(repo.Object);
 
             // Act
             ViewResult result = controller.Delete(1) as ViewResult;
@@ -115,19 +101,19 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
         public void DeleteConfirmed()
         {
             // Arrange
-            repo.Setup(x => x.GetBeestjeById(1)).Returns(new Beestje());
-            BeestjesController controller = new BeestjesController(repo.Object);
+            repo.Setup(x => x.GetAccessoireById(1)).Returns(new Accessoires());
+            AccessoiresController controller = new AccessoiresController(repo.Object);
 
             // Act
             var result = (RedirectToRouteResult)controller.DeleteConfirmed(1);
 
             result.RouteValues["action"].Equals("Index");
-            result.RouteValues["controller"].Equals("Beestjes");
+            result.RouteValues["controller"].Equals("Accessoires");
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"]);
-            Assert.AreEqual("Beestjes", result.RouteValues["controller"]);
-        }*/
+            Assert.AreEqual("Accessoires", result.RouteValues["controller"]);
+        }
     }
 }
 

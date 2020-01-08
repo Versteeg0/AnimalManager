@@ -126,7 +126,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             accessoiresRepository.DeleteAccessoire(accessoires);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Accessoires");
         }
 
         protected override void Dispose(bool disposing)
