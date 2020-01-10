@@ -24,7 +24,7 @@ namespace BeestjeOpJeFeestje.ViewModels
         [DisplayFormat(DataFormatString = "€ {0:n}")]
         [Required(ErrorMessage = "Prijs is verplicht")]
         [RegularExpression(@"^\d+\.\d{0,2}$")]
-        [Range(0, 9999999999999999.99)]
+        [Range(0.01, 9999999999999999.99)]
         [Display(Name = "Prijs")]
         public decimal Price { get { return Beest.Price; } set { Beest.Price = value; } }
 

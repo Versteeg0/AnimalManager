@@ -102,10 +102,29 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             Mock<BeestjeVM> beestjeVM = new Mock<BeestjeVM>();
             beestjeVM.Object.Type = "Test";
             // Act
-            var result = controller.Create(beestjeVM.Object) as ViewResult;
+            var result = controller.Edit(beestjeVM.Object) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void EditBeestAdd()
+        {
+            // Arrange
+            BeestjesController controller = new BeestjesController(repo.Object);
+            Mock<BeestjeVM> beestjeVM = new Mock<BeestjeVM>();
+            beestjeVM.Object.Type = "Woestijn";
+
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(beestjeVM.Object);
+
+            result.RouteValues["action"].Equals("Index");
+            result.RouteValues["controller"].Equals("Beestjes");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Beestjes", result.RouteValues["controller"]);
         }
 
         [TestMethod]
@@ -138,6 +157,21 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"]);
             Assert.AreEqual("Beestjes", result.RouteValues["controller"]);
+        }
+
+
+        [TestMethod]
+        public void Create()
+        {
+            // Arrange
+           
+            BeestjesController controller = new BeestjesController(repo.Object);
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }

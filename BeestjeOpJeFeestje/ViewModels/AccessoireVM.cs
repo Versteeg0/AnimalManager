@@ -20,7 +20,7 @@ namespace BeestjeOpJeFeestje.ViewModels
 
         [Display(Name = "Prijs")]
         [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(typeof(decimal), "0", "100000.00", ErrorMessage = "Vul een decimale waarde in")]
+        [Range(typeof(decimal), "0.01", "100000.00", ErrorMessage = "Vul een decimale waarde in")]
         [RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Vul een decimale waarde in")]
         public decimal Price { get { return Accessoire.Price; } set { Accessoire.Price = value; } }
 

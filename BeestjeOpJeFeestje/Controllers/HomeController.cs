@@ -1,6 +1,7 @@
 ﻿using BeestjeOpJeFeestje.Discount;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
+using BeestjeOpJeFeestje.Validation;
 using BeestjeOpJeFeestje.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace BeestjeOpJeFeestje.Controllers
     [HandleError]
     public class HomeController : Controller
     {
+        private BeestValidation beestValidation;
         private readonly IBoekingRepository boekingRepository;
         private CalculateDiscount calculateDiscount;
 
         public HomeController(IBoekingRepository repo)
         {
             boekingRepository = repo;
+            beestValidation = new BeestValidation();
         }
 
         [HttpGet]
@@ -55,7 +58,7 @@ namespace BeestjeOpJeFeestje.Controllers
             
             foreach(var b in beestjes)
             {
-                if(BeestjeHasNoBoeking(b, boekingVM))
+                if(beestValidation.BeestjeHasNoBoeking(b, boekingVM, boekingRepository))
                 boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = false });
                 else
                  boekingVM.Beestjes.Add(new BeestjeVM { Beest = b, HasBoeking = true });
@@ -86,7 +89,7 @@ namespace BeestjeOpJeFeestje.Controllers
                 return RedirectToAction("Stap1", new {boekingVM.Date});
             }
 
-            string check = CheckIfSelectedBeestjesAreValid(boekingVM);
+            string check = beestValidation.CheckIfSelectedBeestjesAreValid(boekingVM);
 
             if(check != null)
             {
@@ -155,59 +158,6 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             boekingRepository.AddBoeking(boekingVM);
             return View();
-        }
-
-        public bool BeestjeHasNoBoeking(Beestje b, BoekingVM currentBoeking)
-        {
-            foreach(Boeking boeking in boekingRepository.GetAllBoeking())
-            {
-                if (boeking.Beestjes != null && boeking.Beestjes.FirstOrDefault(beest => beest.Id == b.Id) != null && boeking.Date == currentBoeking.Date)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)
-        {
-            bool isFarmAnimal = false;
-            bool isLionorPolar = false;
-            bool isPinguin = false;
-            bool isDesert = false;
-            bool isSnow = false;
-            foreach (Beestje b in boeking.SelectedBeestjes)
-            {
-                if (b.Type == "Boerderij")
-                    isFarmAnimal = true;
-
-                if (b.Name == "Leeuw" || b.Name == "Ijsbeer")
-                    isLionorPolar = true;
-
-                if (b.Name == "Pinguïn")
-                    isPinguin = true;
-
-                if (b.Type == "Woestijn")
-                    isDesert = true;
-
-                if (b.Type == "Sneeuw")
-                    isSnow = true;
-            }
-
-            if (isFarmAnimal && isLionorPolar)
-                return "Je mag geen leeuw of Ijsbeer bij boerderijdieren.";
-
-            DayOfWeek day = boeking.Date.DayOfWeek;
-            if (isPinguin && ((day == DayOfWeek.Saturday) || (day == DayOfWeek.Sunday)))
-                return "Je mag helaas geen pinguïns reserveren in het weekend.";
-
-            if (isDesert && (boeking.Date.Month > 9 || boeking.Date.Month < 3))
-                return "Je mag helaas geen woestijn dieren reserveren in de maanden oktober t/m februari.";   
-            
-            if (isSnow && (boeking.Date.Month > 5 && boeking.Date.Month < 9))
-                return "Je mag helaas geen sneeuw dieren reserveren in de maanden juni t/m augustus.";
-
-            return null;
         }
     }
 }

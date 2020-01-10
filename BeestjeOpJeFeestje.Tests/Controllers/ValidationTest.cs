@@ -1,6 +1,7 @@
 ﻿using BeestjeOpJeFeestje.Controllers;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
+using BeestjeOpJeFeestje.Validation;
 using BeestjeOpJeFeestje.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -53,10 +54,10 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             boekingVM.Object.SelectedBeestjes.Add(ijsbeer.Object);
             boekingVM.Object.SelectedBeestjes.Add(eend.Object);
 
-            HomeController controller = new HomeController(repo.Object);
+            BeestValidation validation = new BeestValidation();
     
             // Act
-            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+            var result = validation.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
 
             // Assert
             Assert.AreEqual("Je mag geen leeuw of Ijsbeer bij boerderijdieren.", result);
@@ -73,10 +74,10 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             pinguin.Object.Name = "Pinguïn";
             boekingVM.Object.SelectedBeestjes.Add(pinguin.Object);
 
-            HomeController controller = new HomeController(repo.Object);
+            BeestValidation validation = new BeestValidation();
            
             // Act
-            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+            var result = validation.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
 
             // Assert
             Assert.AreEqual("Je mag helaas geen pinguïns reserveren in het weekend.", result);
@@ -92,10 +93,10 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             kameel.Object.Type = "Woestijn";
             boekingVM.Object.SelectedBeestjes.Add(kameel.Object);
 
-            HomeController controller = new HomeController(repo.Object);
+            BeestValidation validation = new BeestValidation();
 
             // Act
-            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+            var result = validation.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
 
             // Assert
             Assert.AreEqual("Je mag helaas geen woestijn dieren reserveren in de maanden oktober t/m februari.", result);
@@ -111,10 +112,10 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             kameel.Object.Type = "Sneeuw";
             boekingVM.Object.SelectedBeestjes.Add(kameel.Object);
 
-            HomeController controller = new HomeController(repo.Object);
+            BeestValidation validation = new BeestValidation();
 
             // Act
-            var result = controller.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
+            var result = validation.CheckIfSelectedBeestjesAreValid(boekingVM.Object);
 
             // Assert
             Assert.AreEqual("Je mag helaas geen sneeuw dieren reserveren in de maanden juni t/m augustus.", result);

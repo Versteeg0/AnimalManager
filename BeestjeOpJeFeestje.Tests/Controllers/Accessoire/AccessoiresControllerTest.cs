@@ -51,7 +51,6 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
             // Assert
             Assert.IsNotNull(result);
         }
-
         [TestMethod]
         public void CreateAccessoire()
         {
@@ -67,6 +66,18 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
             // Assert
             Assert.AreEqual("Index", result.RouteValues["action"]);
             Assert.AreEqual("Accessoires", result.RouteValues["controller"]);
+        }
+
+        [TestMethod]
+        public void Create()
+        {
+            // Arrange
+            AccessoiresController controller = new AccessoiresController(repo.Object);
+            // Act
+            var result = controller.Create();
+
+            // Assert
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

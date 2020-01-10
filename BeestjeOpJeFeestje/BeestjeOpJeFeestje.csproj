@@ -201,6 +201,7 @@
     <Compile Include="Repos\IBeestjesRepository.cs" />
     <Compile Include="Repos\IBoekingRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validation\BeestValidation.cs" />
     <Compile Include="ViewModels\AccessoireVM.cs" />
     <Compile Include="ViewModels\BeestjeVM.cs" />
     <Compile Include="ViewModels\BoekingVM.cs" />

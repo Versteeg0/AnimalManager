@@ -44,41 +44,6 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
-        // GET: Boekings/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Boekings/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,FirstName,Prefix,LastName,Email")] BoekingVM boeking)
-        {
-            if (ModelState.IsValid)
-            {
-                boekingRepository.AddBoeking(boeking);
-                return RedirectToAction("Index");
-            }
-
-            return View(boeking);
-        }
-
-        // GET: Boekings/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("Index", "Error");
-            }
-            Boeking boeking = boekingRepository.GetBoekingById(id);
-            if (boeking == null)
-            {
-                return HttpNotFound();
-            }
-            return View(boeking);
-        }
-
         // GET: Boekings/Delete/5
         public ActionResult Delete(int? id)
         {

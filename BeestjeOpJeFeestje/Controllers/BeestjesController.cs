@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
@@ -105,7 +100,7 @@ namespace BeestjeOpJeFeestje.Controllers
                     return View();
                 }
                 beestjesRepository.EditBeestje(beestje);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Beestjes");
             }
             return View(beestje);
         }

@@ -91,7 +91,7 @@
 
 .animallist {
     border: solid 2px lightgray;
-    height: 300px;
+    height: 250px;
     margin-top: 2px;
     margin-left: 5px;
     margin-bottom: 3px;
@@ -111,6 +111,7 @@
 }
 
 .animallistDisable {
+    height: 250px;
     border: solid 2px lightgray;
     margin-top: 2px;
     margin-left: 5px;

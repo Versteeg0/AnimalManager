@@ -15,7 +15,7 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            ErrorHandlerController controller = new ErrorHandlerController();
+            ErrorController controller = new ErrorController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -24,14 +24,13 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-
         [TestMethod]
         public void NotFound()
         {
-            ErrorHandlerController controller = new ErrorHandlerController();
+            ErrorController controller = new ErrorController();
 
             // Act
-            ViewResult result = controller.NotFound() as ViewResult;
+            ViewResult result = controller.PageNotFound() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

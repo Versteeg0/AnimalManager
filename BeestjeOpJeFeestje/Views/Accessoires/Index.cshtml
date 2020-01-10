@@ -1,13 +1,9 @@
 ﻿@model IEnumerable<BeestjeOpJeFeestje.ViewModels.AccessoireVM>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>Accessoires lijst</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nieuwe accesoire aanmaken", "Create")
 </p>
 <table class="table">
     <tr>
@@ -18,7 +14,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
+            Foto
         </th>
         <th></th>
     </tr>
@@ -32,7 +28,10 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            @if (item.ImagePath != null)
+            {
+                <img src='@Url.Content(item.ImagePath)' height="50" />
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Accessoire.Id }) |
