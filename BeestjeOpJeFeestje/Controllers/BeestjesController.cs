@@ -34,7 +34,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)
@@ -77,7 +77,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)
@@ -115,7 +115,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Beestje beestje = beestjesRepository.GetBeestjeById(id);
             if (beestje == null)

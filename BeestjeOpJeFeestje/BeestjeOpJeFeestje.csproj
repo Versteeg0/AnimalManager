@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccessoiresController.cs" />
     <Compile Include="Controllers\BeestjesController.cs" />
     <Compile Include="Controllers\BoekingsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Discount\CalculateDiscount.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,7 @@
     <Content Include="Resources\doggo.png" />
     <Content Include="Resources\donkey.png" />
     <Content Include="Resources\duck.png" />
+    <Content Include="Resources\error.png" />
     <Content Include="Resources\field.png" />
     <Content Include="Resources\ijsbeer.png" />
     <Content Include="Resources\kat.png" />
@@ -261,24 +263,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Beestjes\Delete.cshtml" />
@@ -299,6 +283,8 @@
     <Content Include="Views\Home\Stap3.cshtml" />
     <Content Include="Views\Home\Stap4.cshtml" />
     <Content Include="Views\Home\Finish.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

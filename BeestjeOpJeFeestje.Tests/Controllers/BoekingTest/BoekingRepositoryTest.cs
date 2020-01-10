@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeestjeOpJeFeestje.Tests.Controllers.Boeking
+namespace BeestjeOpJeFeestje.Tests.Controllers.BoekingTest
 {
     [TestClass]
-    public class BoekingControllerTest
+    public class BoekingRepositoryTest
     {
     }
 }

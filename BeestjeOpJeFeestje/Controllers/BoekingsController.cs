@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BeestjeOpJeFeestje.Models;
 using BeestjeOpJeFeestje.Repos;
@@ -35,7 +30,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
@@ -56,8 +51,6 @@ namespace BeestjeOpJeFeestje.Controllers
         }
 
         // POST: Boekings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Date,FirstName,Prefix,LastName,Email")] BoekingVM boeking)
@@ -76,7 +69,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
@@ -91,7 +84,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Boeking boeking = boekingRepository.GetBoekingById(id);
             if (boeking == null)
@@ -108,7 +101,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             Boeking boeking = boekingRepository.GetBoekingById(id);
             boekingRepository.RemoveBoeking(boeking);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Boekings");
         }
 
 

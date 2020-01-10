@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace BeestjeOpJeFeestje.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         private readonly IBoekingRepository boekingRepository;
@@ -64,6 +65,12 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap2(BoekingVM boekingVM)
         {
+            if (boekingVM.Date < DateTime.Now)
+            {
+                TempData["nodateselected"] = "Selecteer een valide datum.";
+                return RedirectToAction("Index", "Home");
+            }
+
             foreach (BeestjeVM b in boekingVM.Beestjes)
             {
                   if (b.IsSelected)
@@ -100,7 +107,13 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap3(BoekingVM boekingVM)
         {
-                foreach (int i in boekingVM.BeestjesIds)
+            if (boekingVM.Date < DateTime.Now)
+            {
+                TempData["nodateselected"] = "Selecteer een valide datum.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (int i in boekingVM.BeestjesIds)
                     boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
 
                 foreach (Accessoires a in boekingVM.Accessoires)
@@ -117,7 +130,13 @@ namespace BeestjeOpJeFeestje.Controllers
 
         public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
-                calculateDiscount = new CalculateDiscount();
+            if (boekingVM.Date < DateTime.Now)
+            {
+                TempData["nodateselected"] = "Selecteer een valide datum.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            calculateDiscount = new CalculateDiscount();
                 foreach (int i in boekingVM.BeestjesIds)
                     boekingVM.SelectedBeestjes.Add(boekingRepository.GetBeestjeById(i));
 
@@ -138,7 +157,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View();
         }
 
-        private bool BeestjeHasNoBoeking(Beestje b, BoekingVM currentBoeking)
+        public bool BeestjeHasNoBoeking(Beestje b, BoekingVM currentBoeking)
         {
             foreach(Boeking boeking in boekingRepository.GetAllBoeking())
             {

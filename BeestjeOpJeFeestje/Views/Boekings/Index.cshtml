@@ -7,7 +7,7 @@
 <h2>Boekings overzicht</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Index", "Home")
+    @Html.ActionLink("Nieuwe boeking aanmaken", "Index", "Home")
 </p>
 <table class="table">
     <tr>
@@ -54,7 +54,7 @@
     </td>
     <td>
         @Html.ActionLink("Details", "Details", new { id = item.BoekingModel.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.BoekingModel.Id })
+        @Html.ActionLink("Verwijderen", "Delete", new { id = item.BoekingModel.Id })
     </td>
 </tr>
 }

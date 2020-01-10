@@ -32,14 +32,12 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Display(Name = "Achternaam")]
         public string LastName { get { return BoekingModel.LastName; } set { BoekingModel.LastName = value; } }
 
-        [Required(ErrorMessage = "Email is verplicht")]
         [EmailAddress(ErrorMessage = "Dit is geen geldig email adres")]
         public string Email { get { return BoekingModel.Email; } set { BoekingModel.Email = value; } }
 
         [Required(ErrorMessage = "Adres is verplicht")]
         public string Adres { get { return BoekingModel.Adres; } set { BoekingModel.Adres = value; } }
 
-        [Required(ErrorMessage = "Nummer is verplicht")]
         [Display(Name = "Telefoonnummer")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]

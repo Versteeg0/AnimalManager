@@ -34,7 +34,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)
@@ -76,7 +76,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)
@@ -109,7 +109,7 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Error");
             }
             Accessoires accessoires = accessoiresRepository.GetAccessoireById(id);
             if (accessoires == null)

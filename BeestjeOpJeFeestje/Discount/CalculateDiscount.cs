@@ -27,9 +27,9 @@ namespace BeestjeOpJeFeestje.Discount
                 if (b.Name == "Eend")
                 {
                     Random r = new Random();
-                    int korting = r.Next(0, 7);
+                    int oneInSix = r.Next(0, 7);
 
-                    if (korting == 1)
+                    if (oneInSix == 1)
                     {
                         //beestprice =- b.Price / 2;
                         DiscountList.Add("Eend 50%");

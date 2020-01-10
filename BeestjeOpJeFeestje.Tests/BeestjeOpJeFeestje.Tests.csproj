@@ -48,6 +48,12 @@
     <Reference Include="Moq, Version=4.13.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.13.1\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib.TestHelper, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.100.0\lib\MvcContrib.TestHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <HintPath>..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -107,13 +113,15 @@
     <Compile Include="Controllers\Beestjes\BeestjesControllerTest.cs" />
     <Compile Include="Controllers\Beestjes\BeestjesRepositoryTest.cs" />
     <Compile Include="Controllers\Beestjes\BeestjeVMTest.cs" />
-    <Compile Include="Controllers\Boeking\BoekingControllerTest.cs" />
-    <Compile Include="Controllers\Boeking\BoekingRepositoryTest.cs" />
-    <Compile Include="Controllers\Boeking\BoekingVMTest.cs" />
+    <Compile Include="Controllers\BoekingTest\BoekingControllerTest.cs" />
+    <Compile Include="Controllers\BoekingTest\BoekingRepositoryTest.cs" />
+    <Compile Include="Controllers\BoekingTest\BoekingVMTest.cs" />
     <Compile Include="Controllers\DiscountTest.cs" />
+    <Compile Include="Controllers\ErrorHandlerControllerTest.cs" />
     <Compile Include="Controllers\ValidationTest.cs" />
+    <Compile Include="Controllers\ViewModels\ViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\Boeking\HomeControllerTest.cs" />
+    <Compile Include="Controllers\BoekingTest\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
