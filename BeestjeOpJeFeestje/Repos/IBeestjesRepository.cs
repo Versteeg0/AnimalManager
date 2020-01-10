@@ -21,5 +21,6 @@ namespace BeestjeOpJeFeestje.Repos
 
        void Dispose();
        List<Accessoires> GetAccessoiresById(int id);
+        List<Boeking> GetBoekingenFromBeestje(BeestjeVM beest);
     }
 }

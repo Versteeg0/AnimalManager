@@ -39,6 +39,7 @@ namespace BeestjeOpJeFeestje.Controllers
             BeestjeVM beestjeVM = new BeestjeVM();
             beestjeVM.Beest = beestje;
             beestjeVM.AccessoiresList = beestjesRepository.GetAccessoiresById(beestjeVM.Id);
+            beestjeVM.AllBoekingen = beestjesRepository.GetBoekingenFromBeestje(beestjeVM);
             return View(beestjeVM);
         }
 

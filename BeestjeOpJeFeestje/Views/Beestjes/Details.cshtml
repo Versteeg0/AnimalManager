@@ -12,14 +12,22 @@
                         <dd>@Model.Name</dd>
                         <dt>Prijs: </dt>
                         <dd>@Model.Price</dd>
-                        @if(@Model.Beest.AccessoireList != null)
-                         {
+                        @if (@Model.Beest.AccessoireList.Count > 0)
+                        {
                             <dt>Accessoires:</dt>
                             foreach (var item in Model.AccessoiresList)
                             {
-                            <dd>@item.Name</dd>
+                                <dd>@item.Name</dd>
                             }
-                         }
+                        }
+                        @if (@Model.AllBoekingen.Count > 0)
+                        {
+                            <dt>Al ingepland op:</dt>
+                            foreach (var item in Model.AllBoekingen)
+                            {
+                                <dd>@item.Date.ToString("dd/MM/yyyy")</dd>
+                            }
+                        }
                     </dl>
                 </div>
             </div>

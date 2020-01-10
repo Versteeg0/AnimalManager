@@ -33,8 +33,10 @@ namespace BeestjeOpJeFeestje.ViewModels
         public string ImagePath { get { return Beest.ImagePath; } set { Beest.ImagePath = value; } }
 
         public bool IsSelected { get { return Beest.IsSelected; } set { Beest.IsSelected = value; } }
-
+        
         public List<Accessoires> AccessoiresList { get; set; } = new List<Accessoires>();
         public bool HasBoeking { get; set; }
+
+        public List<Boeking> AllBoekingen { get; set; } = new List<Boeking>();
     }
 }

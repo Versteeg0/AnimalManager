@@ -61,5 +61,17 @@ namespace BeestjeOpJeFeestje.Repos
         {
             db.Dispose();
         }
+
+        public List<Boeking> GetBoekingenFromBeestje(BeestjeVM beest)
+        {
+            List<Boeking> boekinglist = db.Boekings.Include("Beestjes").ToList();
+            List<Boeking> beestjesboeking = new List<Boeking>();
+            foreach(Boeking b in boekinglist)
+            {
+                if (b.Beestjes.Contains(beest.Beest))
+                    beestjesboeking.Add(b);
+            }
+            return beestjesboeking;
+        }
     }
 }
