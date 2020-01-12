@@ -2,37 +2,28 @@
 
 
 
-<div>
-    <h4>Accessoire @Model.Name</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-
-    </dl>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Details @Model.Accessoire.Name</h2>
+                <div class="row">
+                    <div class="center-block">
+                        <dl>
+                            <dt>Naam </dt>
+                            <dd>@Model.Accessoire.Name</dd>
+                            <dt>Prijs: </dt>
+                            <dd>@Model.Accessoire.Price</dd>
+                        </dl>
+                        @if (@Model.Accessoire.ImagePath != null)
+                        {
+                            <img class="center-block" height="300" src='@Url.Content(Model.ImagePath)' />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Accessoire.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Accessoire.Id }) |
+    @Html.ActionLink("Terug naar overzicht", "Index")
 </p>

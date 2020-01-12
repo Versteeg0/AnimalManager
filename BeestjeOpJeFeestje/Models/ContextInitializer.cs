@@ -26,15 +26,15 @@ namespace BeestjeOpJeFeestje.Models
             context.Beestjes.Add(new Beestje() { Id = 12, Name = "Zeehond", Type = "Sneeuw", Price = 69.50m, ImagePath = "~/Resources/zeehond.png" });
             context.Beestjes.Add(new Beestje() { Id = 13, Name = "Kat", Type = "Woestijn", Price = 80.30m, ImagePath = "~/Resources/kat.png" });
 
-            context.Accessoires.Add(new Accessoires() { Id = 1, Name = "Banaan", Price = 2.00m, Beest = context.Beestjes.Find(1)});
-            context.Accessoires.Add(new Accessoires() { Id = 2, Name = "Zadel", Price = 2.00m, Beest = context.Beestjes.Find(3)});
-            context.Accessoires.Add(new Accessoires() { Id = 3, Name = "Krukje", Price = 2.00m, Beest = context.Beestjes.Find(4)});
-            context.Accessoires.Add(new Accessoires() { Id = 4, Name = "Zweep", Price = 2.00m, Beest = context.Beestjes.Find(4)});
-            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(5)});
-            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Dansschoenen", Price = 2.00m, Beest = context.Beestjes.Find(10)});
-            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(12)});
+            context.Accessoires.Add(new Accessoires() { Id = 1, Name = "Banaan", Price = 2.00m, Beest = context.Beestjes.Find(1), ImagePath = "~/Resources/banana.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 2, Name = "Zadel", Price = 2.00m, Beest = context.Beestjes.Find(3), ImagePath = "~/Resources/zadel.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 3, Name = "Krukje", Price = 2.00m, Beest = context.Beestjes.Find(4), ImagePath = "~/Resources/krukje.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 4, Name = "Zweep", Price = 2.00m, Beest = context.Beestjes.Find(4), ImagePath = "~/Resources/zweep.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(5), ImagePath = "~/Resources/ball.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Dansschoenen", Price = 2.00m, Beest = context.Beestjes.Find(10), ImagePath = "~/Resources/dansschoenen.png" });
+            context.Accessoires.Add(new Accessoires() { Id = 5, Name = "Bal", Price = 2.00m, Beest = context.Beestjes.Find(12), ImagePath = "~/Resources/ball.png" });
 
-            var boeking = new Boeking() { Id = 1, FirstName = "lars", LastName = "versteeg", Date = DateTime.Now};
+            var boeking = new Boeking() { Id = 1, FirstName = "Piet", LastName = "Peters", Date = DateTime.Now};
             var beestje = context.Beestjes.Find(1);
             boeking.Beestjes.Add(beestje);
             context.Boekings.Add(boeking);
