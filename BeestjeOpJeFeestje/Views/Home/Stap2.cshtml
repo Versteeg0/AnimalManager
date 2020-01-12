@@ -41,6 +41,12 @@
                                     <p />
                                     @Html.CheckBoxFor(model => model.Accessoires[i].IsSelected)
                                 </div>
+                                <div class="panel-body" style="border:solid 1px lightgray">
+                                    @if (Model.Accessoires[i].ImagePath != null)
+                                    {
+                                        <img src='@Url.Content(Model.Accessoires[i].ImagePath)' height="100" />
+                                    }
+                                </div>
                                 <div class="panel-footer animaltekst">
                                     @Html.HiddenFor(model => model.Accessoires[i].Id)
                                     @Html.DisplayFor(model => model.Accessoires[i].Price)

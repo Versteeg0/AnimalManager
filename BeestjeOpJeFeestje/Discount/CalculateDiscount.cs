@@ -10,7 +10,9 @@ namespace BeestjeOpJeFeestje.Discount
     public class CalculateDiscount
     {
 
+
         public List<string> DiscountList { get; set; } = new List<string>();
+        public bool HasDuck = false;
 
         public decimal CalculateTotalPrice(BoekingVM boekingVM)
         {
@@ -28,7 +30,7 @@ namespace BeestjeOpJeFeestje.Discount
                 {
                     Random r = new Random();
                     int oneInSix = r.Next(0, 7);
-
+                    HasDuck = true;
                     if (oneInSix == 1)
                     {
                         //beestprice =- b.Price / 2;

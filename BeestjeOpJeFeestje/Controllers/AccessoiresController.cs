@@ -99,7 +99,7 @@ namespace BeestjeOpJeFeestje.Controllers
             if (ModelState.IsValid)
             {
                 accessoiresRepository.EditAccessoire(model);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Accessoires");
             }
             return View(model);
         }

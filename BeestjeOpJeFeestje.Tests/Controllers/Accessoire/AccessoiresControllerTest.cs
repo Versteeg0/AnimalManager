@@ -84,6 +84,23 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.Accessoire
         public void Edit()
         {
             // Arrange
+            AccessoiresController controller = new AccessoiresController(repo.Object);
+            Mock<AccessoireVM> a = new Mock<AccessoireVM>();
+            // Act
+            var result = (RedirectToRouteResult)controller.Edit(a.Object);
+
+            result.RouteValues["action"].Equals("Index");
+            result.RouteValues["controller"].Equals("Accessoires");
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Accessoires", result.RouteValues["controller"]);
+        }
+
+        [TestMethod]
+        public void EditAccessoire()
+        {
+            // Arrange
             repo.Setup(x => x.GetAccessoireById(1)).Returns(new Accessoires());
             AccessoiresController controller = new AccessoiresController(repo.Object);
 

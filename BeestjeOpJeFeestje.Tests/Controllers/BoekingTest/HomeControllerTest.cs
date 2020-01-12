@@ -137,6 +137,27 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.BoekingTest
         }
 
         [TestMethod]
+        public void Stap2NoBeestjesSelected()
+        {
+            // Arrange
+            HomeController controller = new HomeController(repo.Object);
+            Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
+            boekingVM.Object.Date = DateTime.Today.AddDays(1);
+
+            // Act         
+            var result = (RedirectToRouteResult)controller.Stap2(boekingVM.Object);
+
+            // Assert
+            result.RouteValues["action"].Equals("Stap1");
+            result.RouteValues["controller"].Equals("Home");
+
+            // Assert
+            Assert.AreEqual("Stap1", result.RouteValues["action"]);
+            Assert.AreEqual("Home", result.RouteValues["controller"]);
+        }
+
+
+        [TestMethod]
         public void Stap3()
         {
             // Arrange

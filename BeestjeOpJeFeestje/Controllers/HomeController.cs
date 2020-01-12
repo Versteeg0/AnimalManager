@@ -86,7 +86,7 @@ namespace BeestjeOpJeFeestje.Controllers
             if (boekingVM.SelectedBeestjes.Count == 0)
             {
                 TempData["nobeestselected"] = "Selecteer minimaal een beest.";
-                return RedirectToAction("Stap1", new {boekingVM.Date});
+                return RedirectToAction("Stap1", "Home", new {boekingVM.Date});
             }
 
             string check = beestValidation.CheckIfSelectedBeestjesAreValid(boekingVM);
@@ -94,7 +94,7 @@ namespace BeestjeOpJeFeestje.Controllers
             if(check != null)
             {
                 TempData["wrongcollection"] = check;
-                return RedirectToAction("Stap1", new { boekingVM.Date});
+                return RedirectToAction("Stap1", "Home", new { boekingVM.Date});
             }
 
             foreach(Beestje beest in boekingVM.SelectedBeestjes)

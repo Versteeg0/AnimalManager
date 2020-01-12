@@ -87,7 +87,6 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
         {
             // Arrange
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
-            bool hasDuck = false;
             Mock<Beestje> animal1 = new Mock<Beestje>();
 
             // If these are not initialized correctly, automatically takes the 2% discount
@@ -107,11 +106,8 @@ namespace BeestjeOpJeFeestje.Tests.Controllers
             // Act
             var result = discount.CalculateTotalPrice(boekingVM.Object);
 
-            if (result == 5.00m || result == 10.00m)
-                hasDuck = true;
-
             // Assert
-            Assert.IsTrue(hasDuck);
+            Assert.IsTrue(discount.HasDuck);
         }
 
         [TestMethod]

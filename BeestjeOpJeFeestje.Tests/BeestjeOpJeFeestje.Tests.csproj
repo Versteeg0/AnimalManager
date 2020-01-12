@@ -108,13 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Accessoire\AccessoiresControllerTest.cs" />
-    <Compile Include="Controllers\Accessoire\AccessoiresRepositoryTest.cs" />
     <Compile Include="Controllers\Accessoire\AccessoireVMTest.cs" />
     <Compile Include="Controllers\Beestjes\BeestjesControllerTest.cs" />
-    <Compile Include="Controllers\Beestjes\BeestjesRepositoryTest.cs" />
     <Compile Include="Controllers\Beestjes\BeestjeVMTest.cs" />
     <Compile Include="Controllers\BoekingTest\BoekingControllerTest.cs" />
-    <Compile Include="Controllers\BoekingTest\BoekingRepositoryTest.cs" />
     <Compile Include="Controllers\BoekingTest\BoekingVMTest.cs" />
     <Compile Include="Controllers\DiscountTest.cs" />
     <Compile Include="Controllers\ErrorHandlerControllerTest.cs" />
