@@ -11,11 +11,11 @@ namespace BeestjeOpJeFeestje.Validation
     public class BeestValidation
     {
         /**
-         * This method checks if the animals that are selected by the user are following the rules
-         * It first checks if the animals are from a specific type or have a specific name
-         * After this it checks several combinations to see if it violates any rules. 
-         * If it does not violate any rules this method returns null
-         */
+        * This method checks if the animals that are selected by the user are following the rules
+        * It first checks if the animals are from a specific type or have a specific name
+        * After this it checks several combinations to see if it violates any rules. 
+        * If it does not violate any rules this method returns null
+        */
         public string CheckIfSelectedBeestjesAreValid(BoekingVM boeking)
         {
             bool isFarmAnimal = false;
@@ -58,8 +58,8 @@ namespace BeestjeOpJeFeestje.Validation
         }
 
         /**
-         * Check if the animal has a booking on the same date as the current booking.
-         */
+        * Check if the animal has a booking on the same date as the current booking.
+        */
         public bool BeestjeHasNoBoeking(Beestje b, BoekingVM currentBoeking, IBoekingRepository boekingsRepository)
         {
             foreach (Boeking boeking in boekingsRepository.GetAllBoeking())
