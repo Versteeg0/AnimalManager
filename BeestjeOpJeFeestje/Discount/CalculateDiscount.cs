@@ -14,6 +14,11 @@ namespace BeestjeOpJeFeestje.Discount
         public List<string> DiscountList { get; set; } = new List<string>();
         public bool HasDuck = false;
 
+        /**
+         * This method checks if the selected animals are from specific types or have specific names
+         * If this is true the user gets a discount on the total price of the booking.
+         * After it checked all the animals the total price gets calculated by taking the discount price from the total price
+         */
         public decimal CalculateTotalPrice(BoekingVM boekingVM)
         {
             DiscountList.Clear();

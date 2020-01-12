@@ -15,6 +15,8 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             beestjesRepository = repo;
         }
+
+        // Shows all the animals in the database
         [HttpGet]
         public ActionResult Index()
         {
@@ -24,7 +26,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestList);
         }
 
-        // GET: Beestjes/Details/5
+        // Shows the details of an animal
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,13 +45,13 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestjeVM);
         }
 
-        // GET: Beestjes/Create
+        //Shows the page to create an animal
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Beestjes/Create
+        //Validate the user input and then create the animal in the database.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Type,Price,imagePath")] BeestjeVM beestje)
@@ -68,7 +70,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestje);
         }
 
-        // GET: Beestjes/Edit/5
+        // Get an animal and show a page to edit the animal
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,9 +87,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestjeVM);
         }
 
-        // POST: Beestjes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Validate the user input and save the changes to the animal
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Type,Price,imagePath")] BeestjeVM beestje)
@@ -106,7 +106,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestje);
         }
 
-        // GET: Beestjes/Delete/5
+        //Get the selected animal and show the delete page
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(beestje);
         }
 
-        // POST: Beestjes/Delete/5
+        //delete the selected animal after the user confirms
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

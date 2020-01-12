@@ -24,6 +24,9 @@ namespace BeestjeOpJeFeestje.Controllers
             beestValidation = new BeestValidation();
         }
 
+        /**
+         * Startpage of the application, checks if tempdata is not empty to handle validation
+         */
         [HttpGet]
         public ActionResult Index()
         {
@@ -34,6 +37,11 @@ namespace BeestjeOpJeFeestje.Controllers
             return View();
         }
 
+        /**
+        * First step of the process, checks if tempdata is not empty to handle validation
+        * Sets a list of all the animals in the database, if they are already in a booking on that date
+        * they will become unable to select.
+        */
         public ActionResult Stap1(BoekingVM boekingVM)
         {
             if(boekingVM.Date < DateTime.Now)
@@ -66,6 +74,10 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
+        /**
+         * Second step of the process, checks if tempdata is not empty to handle validation
+         * Sets a list of all the accessoires that are from one of the selected animals
+         */
         public ActionResult Stap2(BoekingVM boekingVM)
         {
             if (boekingVM.Date < DateTime.Now)
@@ -108,6 +120,10 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
+        /**
+         * Third step of the process, checks if tempdata is not empty to handle validation
+         * User can input his data here for the booking
+         */
         public ActionResult Stap3(BoekingVM boekingVM)
         {
             if (boekingVM.Date < DateTime.Now)
@@ -131,6 +147,11 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
+        /**
+        * Fourth step of the process, checks if tempdata is not empty to handle validation
+        * User can see and confirm his booking
+        * Also calculates the total price with discounts by using the CalculateDiscount class
+        */
         public ActionResult Stap4([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {
             if (boekingVM.Date < DateTime.Now)
@@ -153,6 +174,11 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
+        /**
+        * Last step of the process, 
+        * User sees a conformation message of his booking.
+        * Saves the booking in the database
+        */
         [HttpPost]
         public ActionResult Finish([Bind(Include = "Date,FirstName, Prefix, LastName, Adres, Email, Number, TotalPrice, BeestjesIds, AccessoiresIds")]BoekingVM boekingVM)
         {

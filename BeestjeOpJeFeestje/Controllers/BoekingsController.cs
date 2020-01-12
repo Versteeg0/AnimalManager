@@ -16,7 +16,7 @@ namespace BeestjeOpJeFeestje.Controllers
             boekingRepository = repo;
         }
 
-        // GET: Boekings
+        // Shows all the bookings in the database
         public ActionResult Index()
         {
             List<BoekingVM> boekingList = new List<BoekingVM>();
@@ -25,7 +25,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingList);
         }
 
-        // GET: Boekings/Details/5
+        // Shows the details of a booking
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,7 +44,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boekingVM);
         }
 
-        // GET: Boekings/Delete/5
+        //Get the selected booking and show the delete page
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -59,7 +59,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(boeking);
         }
 
-        // POST: Boekings/Delete/5
+        //Delete the booking after the user confirms this
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

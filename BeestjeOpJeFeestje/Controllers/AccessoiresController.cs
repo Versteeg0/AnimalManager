@@ -20,7 +20,8 @@ namespace BeestjeOpJeFeestje.Controllers
         {
             accessoiresRepository = repo;
         }
-        // GET: Accessoires
+
+        // Shows all the accessoires in the database
         public ActionResult Index()
         {
             List<AccessoireVM> accessoiresList = new List<AccessoireVM>();
@@ -29,7 +30,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoiresList);
         }
 
-        // GET: Accessoires/Details/5
+        // Shows the details of an accessoire
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,7 +47,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoireVM);
         }
 
-        // GET: Accessoires/Create
+        //Shows the page to create an accessoire, get a list of all the animals to select from
         public ActionResult Create()
         {
             var accessoireVM = new AccessoireVM();
@@ -55,9 +56,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoireVM);
         }
 
-        // POST: Accessoires/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //Validate the user input and then create the accessoire in the database.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Price,ImagePath,SelectedBeestjesId")] AccessoireVM accessoires)
@@ -71,7 +70,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoires);
         }
 
-        // GET: Accessoires/Edit/5
+        // Get an accessoire and show a page to edit the accessoire
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,9 +88,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoireVM);
         }
 
-        // POST: Accessoires/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Validate the user input and save the changes to the accessoire
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Price,ImagePath,SelectedBeestjesId")] AccessoireVM model)
@@ -104,7 +101,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(model);
         }
 
-        // GET: Accessoires/Delete/5
+        //Get the selected accessoire and show the delete page
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,7 +116,7 @@ namespace BeestjeOpJeFeestje.Controllers
             return View(accessoires);
         }
 
-        // POST: Accessoires/Delete/5
+        //Delete the accessoire after the user confirms this
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

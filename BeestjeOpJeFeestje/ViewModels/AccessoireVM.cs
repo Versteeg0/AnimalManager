@@ -31,7 +31,9 @@ namespace BeestjeOpJeFeestje.ViewModels
         [Display(Name = "Selecteer een beestje")]
         [Required(ErrorMessage = "Selecteer een beestje")]
         public int SelectedBeestjesId { get; set; }
+
         public IEnumerable<Beestje> BeestjesLijst { get; set; }
+
         public Beestje Beest { get { return Accessoire.Beest; } set { Accessoire.Beest = value; } }
     }
 }
