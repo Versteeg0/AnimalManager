@@ -126,6 +126,7 @@ namespace BeestjeOpJeFeestje.Tests.Controllers.BoekingTest
             HomeController controller = new HomeController(repo.Object);
             Mock<BoekingVM> boekingVM = new Mock<BoekingVM>();
             Mock<Beestje> beest = new Mock<Beestje>();
+            beest.Object.IsSelected = true;
             boekingVM.Object.Date = DateTime.Today.AddDays(1);
             boekingVM.Object.SelectedBeestjes.Add(beest.Object);
 
